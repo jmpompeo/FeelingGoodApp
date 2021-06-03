@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MockFinalProject2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,14 @@ namespace FeelingGoodApp
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<FeelingGoodContext>();
+
+            services.AddHttpClient<INutritionService, NutritionService>(client =>
+            {
+                client.BaseAddress = new Uri("https://trackapi.nutritionix.com");
+                //client.DefaultRequestHeaders.Add("98c2fa3e", "dc56bc8a2198c8c565920b74dc18813c");
+
+            });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
