@@ -1,4 +1,5 @@
 using FeelingGoodApp.Data;
+using FeelingGoodApp.Services.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

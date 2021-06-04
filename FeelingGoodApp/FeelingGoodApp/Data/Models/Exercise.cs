@@ -25,6 +25,7 @@ namespace FeelingGoodApp.Data.Models
 
     public partial class Exercises
     {
+        public int Id { get; set; }
         public Exercise Exercise { get; set; }
     }
 }

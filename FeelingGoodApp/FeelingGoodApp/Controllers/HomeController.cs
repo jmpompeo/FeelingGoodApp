@@ -3,6 +3,7 @@ using FeelingGoodApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -44,7 +45,14 @@ namespace FeelingGoodApp.Controllers
         public async Task<IActionResult> ShowMeal()
         {
             var response = await _service.GetName();
-            return View(response);
+            return View(response.Breakfast);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ShowExercise(string exercise)
+        {
+            var activity = await _service.GetExercise(exercise);
+            return View(activity.exercises.First());
         }
 
         public IActionResult Privacy()

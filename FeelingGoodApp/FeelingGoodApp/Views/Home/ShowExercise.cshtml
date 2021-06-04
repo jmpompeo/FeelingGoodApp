@@ -1,0 +1,54 @@
+﻿@model FeelingGoodApp.Services.Models.ExerciseInfo
+
+@{
+    ViewData["Title"] = "ShowExercise";
+}
+
+<h1>ShowExercise</h1>
+
+<div>
+    <h4>ExerciseInfo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.user_input)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.user_input)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.duration_min)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.duration_min)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.met)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.met)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nf_calories)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nf_calories)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.description)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
