@@ -8,6 +8,6 @@ namespace FeelingGoodApp.Services
     public interface INutritionService
     {
         Task<UserNutrition> GetName();
-        Task<ExerciseInfo> GetExercise(string exercise);
+        Task<ExerciseInfo> GetExercise(UserProfileViewModel profile);
     }
 }

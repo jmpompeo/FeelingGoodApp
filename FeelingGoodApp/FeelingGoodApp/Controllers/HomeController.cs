@@ -49,11 +49,18 @@ namespace FeelingGoodApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ShowExercise(string exercise)
+        public async Task<IActionResult> ShowExercise(UserProfileViewModel profile)
         {
-            var activity = await _service.GetExercise(exercise);
-            return View(activity.exercises.First());
+            var activity = await _service.GetExercise(profile);
+            return View(activity);
         }
+
+       // [HttpPost]
+       //public async Task<IActionResult> EditExercise(UserProfileViewModel profile)
+       // {
+
+       //     var edit = await _service.
+       // }
 
         public IActionResult Privacy()
         {
