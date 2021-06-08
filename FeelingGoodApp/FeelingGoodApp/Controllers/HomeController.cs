@@ -39,7 +39,16 @@ namespace FeelingGoodApp.Controllers
 
             var results = await response.Content.ReadAsStringAsync(); //Here i put the BreakPoint 
 
-            return View();
+            return View(results);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Search(string Item_Name)
+        {
+            var information = await _service.GetFieldsAsync(Item_Name);
+            NutritionViewModel FoodChoice = new NutritionViewModel(information.hits.FirstOrDefault().fields.item_name, information.hits.FirstOrDefault().fields.nf_calories, information.hits.FirstOrDefault().fields.nf_serving_size_qty);
+            //var response = information.hits.FirstOrDefault().fields.nf_calories;
+            return View(FoodChoice);
         }
 
         public async Task<IActionResult> ShowMeal()
@@ -49,10 +58,10 @@ namespace FeelingGoodApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ShowExercise(string exercise)
+        public async Task<IActionResult> ShowExercise(UserProfileViewModel profile)
         {
-            var activity = await _service.GetExercise(exercise);
-            return View(activity.exercises.First());
+            var activity = await _service.GetExercise(profile);
+            return View(activity);
         }
 
         public IActionResult Privacy()

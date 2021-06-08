@@ -1,21 +1,19 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model NutritionViewModel
+@{
+    ViewData["Title"] = "Index";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Index</h1>
 
-<form asp-controller="Home" asp-action="ShowMeal">
-    <label for="meal">Enter Food Item</label>
-    <input type="text" id="meal" name="meal" />
-    <button type="submit" class="btn btn-primary">Search</button>
+<form asp-action="Search">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="item_name" class="control-label"></label>
+        <input asp-for="item_name" class="form-control" />
+        <span asp-validation-for="item_name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
 </form>
-
-<form asp-controller="Home" asp-action="ShowExercise">
-    <label for="exercise">Enter Exercise</label>
-    <input type="text" id="exercise" name="exercise" />
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
-
