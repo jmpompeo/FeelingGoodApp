@@ -3,8 +3,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FeelingGoodApp.Models;
 using System.Net.Http.Json;
-using FeelingGoodApp.Data.Models;
+using System.Text.Json;
 using FeelingGoodApp.Services.Models;
+using System.ComponentModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FeelingGoodApp.Services
 {
@@ -17,17 +20,45 @@ namespace FeelingGoodApp.Services
         }
 
         [HttpPost]
-        public async Task<UserNutrition> GetName()
+        public async Task<ExerciseInfo> GetExercise(UserProfileViewModel profile)
         {
-            return await _client.GetFromJsonAsync<UserNutrition>("/v2/natural/nutrients");
+            var exerciseRequest = MapUserProfileToExerciseRequest(profile);
+
+            var content = new Dictionary<string, string>
+            {
+                { "query", exerciseRequest.Query },
+                { "gender", exerciseRequest.Gender },
+                { "weight_kg", exerciseRequest.WeightKg },
+                { "height_cm", exerciseRequest.HeightCm },
+                { "age" , exerciseRequest.Age }
+            };
+
+            var query = new FormUrlEncodedContent(content);
+
+            var response = await _client.PostAsync($"v2/natural/exercise", query);
+            //response.EnsureSuccessStatusCode();
+            var results = await response.Content.ReadFromJsonAsync<ExerciseResponse>();
+
+            return results.Exercises.First();
         }
 
-        [HttpPost]
-        public async Task<ExerciseInfo> GetExercise(string exercise)
+        private ExerciseRequest MapUserProfileToExerciseRequest(UserProfileViewModel profile)
         {
-            var response = await _client.PostAsJsonAsync($"/v2/natural/exercise", new ExerciseRequest { query = exercise, gender = "male", weight_kg = 72, age = 30, height_cm = 167 });
-            //response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<ExerciseInfo>();
+            return new ExerciseRequest
+            {
+                Query = profile.query,
+                Gender = profile.gender,
+                WeightKg = profile.weight_kg.ToString(),
+                HeightCm = profile.height_cm.ToString(),
+                Age = profile.age.ToString()
+            };
         }
+
+        public async Task<NutritionFactsResults> GetFieldsAsync(string item_name)
+        {
+            return await _client.GetFromJsonAsync<NutritionFactsResults>($"v1_1/search/{item_name}?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories");
+        }
+
+
     }
 }

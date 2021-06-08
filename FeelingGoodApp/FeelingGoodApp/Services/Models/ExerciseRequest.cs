@@ -8,10 +8,9 @@ namespace FeelingGoodApp.Services.Models
     public class ExerciseRequest
     {
         public int Id { get; set; }
-        public string query { get; set; }
-        public string gender { get; set; }
-        public float weight_kg { get; set; }
-        public float height_cm { get; set; }
-        public int age { get; set; }
+        public string Query { get; set; }
+        public string Gender { get; set; }
+        public string WeightKg { get; set; }
+        public string HeightCm { get; set; }
+        public string Age { get; set; }
     }
-}

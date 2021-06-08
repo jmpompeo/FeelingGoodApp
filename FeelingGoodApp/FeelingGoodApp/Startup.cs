@@ -32,10 +32,14 @@ namespace FeelingGoodApp
 
             services.AddHttpClient<INutritionService, NutritionService>(client =>
             {
-                client.BaseAddress = new Uri("https://trackapi.nutritionix.com");
-                client.DefaultRequestHeaders.Add("x-app-id", "98c2fa3e");
-                client.DefaultRequestHeaders.Add("x-app-key", "dc56bc8a2198c8c565920b74dc18813c");
+                client.BaseAddress = new Uri("https://nutritionix-api.p.rapidapi.com/");
+                client.DefaultRequestHeaders.Add("X-Rapidapi-Key", "19ca1a2deamsha9d4dd326efb3f6p1d87dbjsn37d56dc27842");
+            });
 
+            services.AddHttpClient<ILocationService, LocationService>(client =>
+            {
+                client.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/");
+                client.DefaultRequestHeaders.Add("User-Agent", "FeelingGoodApp");
             });
 
             services.AddControllersWithViews();
