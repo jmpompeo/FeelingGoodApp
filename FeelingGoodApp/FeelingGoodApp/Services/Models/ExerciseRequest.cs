@@ -14,3 +14,4 @@ namespace FeelingGoodApp.Services.Models
         public string HeightCm { get; set; }
         public string Age { get; set; }
     }
+}

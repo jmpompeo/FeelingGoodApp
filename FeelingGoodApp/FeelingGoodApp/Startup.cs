@@ -39,7 +39,6 @@ namespace FeelingGoodApp
             services.AddHttpClient<ILocationService, LocationService>(client =>
             {
                 client.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/");
-                client.DefaultRequestHeaders.Add("User-Agent", "FeelingGoodApp");
             });
 
             services.AddControllersWithViews();
