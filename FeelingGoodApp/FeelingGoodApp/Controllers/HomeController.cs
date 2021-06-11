@@ -1,6 +1,7 @@
 ﻿using FeelingGoodApp.Models;
 using FeelingGoodApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Linq;
@@ -13,15 +14,17 @@ namespace FeelingGoodApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly INutritionService _service;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger, INutritionService service)
+        public HomeController(ILogger<HomeController> logger, INutritionService service, IConfiguration configuration)
         {
             _logger = logger;
             _service = service;
+            _configuration = configuration;
         }
         public async Task<IActionResult> Index()
         {
-            var apiKey = "AIzaSyAMovAJFRpDQRN6M1jBAg19HOl415teiNY";
+            var apiKey = _configuration["GooglePlaceApiKey"];
             var latitude = 42.331429; //42.348495 
             var longitude = -83.045753; //-83.060303
             var radius = 5000;

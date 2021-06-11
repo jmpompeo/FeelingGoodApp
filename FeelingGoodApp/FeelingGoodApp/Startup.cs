@@ -27,14 +27,14 @@ namespace FeelingGoodApp
             services.AddDbContext<FeelingGoodContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<FeelingGoodContext>();
 
             services.AddHttpClient<INutritionService, NutritionService>(client =>
             {
                 client.BaseAddress = new Uri("https://trackapi.nutritionix.com/");
-                client.DefaultRequestHeaders.Add("x-app-id", "98c2fa3e");
-                client.DefaultRequestHeaders.Add("x-app-key", "dc56bc8a2198c8c565920b74dc18813c");
+                client.DefaultRequestHeaders.Add("x-app-id", Configuration["NutritionAppId"]);
+                client.DefaultRequestHeaders.Add("x-app-key", Configuration["NutritionAppKey"]);
             });
 
             services.AddControllersWithViews();

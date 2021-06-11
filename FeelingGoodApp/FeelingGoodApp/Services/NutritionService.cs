@@ -7,15 +7,19 @@ using FeelingGoodApp.Data.Models;
 using FeelingGoodApp.Services.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace FeelingGoodApp.Services
 {
     public class NutritionService : INutritionService
     {
         private readonly HttpClient _client;
-        public NutritionService(HttpClient client)
+        private readonly IConfiguration _configuration;
+
+        public NutritionService(HttpClient client, IConfiguration configuration)
         {
             _client = client;
+            _configuration = configuration;
         }
 
         [HttpPost]
