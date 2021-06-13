@@ -5,7 +5,6 @@ namespace FeelingGoodApp.Data
 {
     public class ApplicationUser : IdentityUser
     {
-
         [PersonalData]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

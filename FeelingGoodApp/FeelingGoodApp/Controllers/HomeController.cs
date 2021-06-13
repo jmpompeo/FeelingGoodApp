@@ -29,10 +29,11 @@ namespace FeelingGoodApp.Controllers
             _userManager = userManager;
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var userId = _userManager.GetUserId(User);
-            return View(await _context.EndUser.Where(x => x.Id.ToString() == userId).ToListAsync()); // need to figure out how to get it to work with Id
+            //var userId = _userManager.GetUserId(User);
+            //return View(await _context.EndUser.FirstOrDefaultAsync(x => x.Id == userId)); // need to figure out how to get it to work with Id
+            return View();
         }
 
         [HttpPost]
