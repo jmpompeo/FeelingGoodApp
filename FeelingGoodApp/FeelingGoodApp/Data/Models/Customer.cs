@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace FeelingGoodApp.Data.Models
 {
@@ -15,5 +11,6 @@ namespace FeelingGoodApp.Data.Models
 
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
+        public string Address { get; set; }
     }
 }

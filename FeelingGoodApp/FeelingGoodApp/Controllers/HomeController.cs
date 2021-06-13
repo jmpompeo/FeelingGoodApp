@@ -32,7 +32,7 @@ namespace FeelingGoodApp.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
-            return View(await _context.EndUser.Where(x => x.FirstName == userId).ToListAsync()); // need to figure out how to get it to work with Id
+            return View(await _context.EndUser.Where(x => x.Id.ToString() == userId).ToListAsync()); // need to figure out how to get it to work with Id
         }
 
         [HttpPost]
@@ -49,7 +49,7 @@ namespace FeelingGoodApp.Controllers
         public async Task<IActionResult> GetLongLat(int zipCode)
         {
 
-            var getZip = await _userManager.Users.Where(x => x.ZipCode == zipCode);
+            //var getZip = await _userManager.Users.Where(x => x.ZipCode == zipCode);
 
             var location = await _locationService.GetLocationAsync(zipCode);
 

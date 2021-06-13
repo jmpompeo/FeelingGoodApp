@@ -7,7 +7,7 @@ namespace FeelingGoodApp.Services
 {
     public interface ILocationService
     {
-        Task<IList<Result>> GetPlacesAsync(Location location);
+        Task<IList<Place>> GetPlacesAsync(Location location);
         Task<Location> GetLocationAsync(int zipCode);
         //Task<object> GetFitnessAsync(string latitude, string longitude);
     }

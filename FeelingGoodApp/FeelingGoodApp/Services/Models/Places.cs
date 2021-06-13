@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 namespace FeelingGoodApp.Services.Models
 {
 
-    public class Place
+    public class PlacesResponse
     {
         public object[] html_attributions { get; set; }
         public string next_page_token { get; set; }
-        public Result[] results { get; set; }
+        public Place[] results { get; set; }
         public string status { get; set; }
     }
 
-    public class Result
+    public class Place
     {
         public string business_status { get; set; }
         public Geometry geometry { get; set; }

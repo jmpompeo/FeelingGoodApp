@@ -1,12 +1,12 @@
 ﻿using FeelingGoodApp.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using FeelingGoodApp.Services.Models;
 using FeelingGoodApp.Models;
+using FeelingGoodApp.Data;
 
 namespace FeelingGoodApp.Services.Models
 {
-    public class FeelingGoodContext : IdentityDbContext
+    public class FeelingGoodContext : IdentityDbContext<ApplicationUser>
     {
         public FeelingGoodContext(DbContextOptions<FeelingGoodContext> options)
             : base(options)
@@ -19,6 +19,6 @@ namespace FeelingGoodApp.Services.Models
         public DbSet<ExerciseResponse> ExerciseResponse { get; set; }
         public DbSet<LocationViewModel> LocationViewModel { get; set; }
         public DbSet<Location> Location { get; set; }
-        public DbSet<Customer> EndUser { get; set; }
+        public DbSet<ApplicationUser> EndUser { get; set; }
     }
 }
