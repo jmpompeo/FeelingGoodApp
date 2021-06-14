@@ -31,11 +31,20 @@ namespace FeelingGoodApp
             services.AddDbContext<FeelingGoodContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+<<<<<<< HEAD
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+=======
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+>>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
                 .AddEntityFrameworkStores<FeelingGoodContext>();
 
             services.AddHttpClient<INutritionService, NutritionService>(client =>
             {
+<<<<<<< HEAD
+                client.BaseAddress = new Uri("https://trackapi.nutritionix.com/");
+                client.DefaultRequestHeaders.Add("x-app-id", Configuration["NutritionAppId"]);
+                client.DefaultRequestHeaders.Add("x-app-key", Configuration["NutritionAppKey"]);
+=======
                 client.BaseAddress = new Uri("https://nutritionix-api.p.rapidapi.com/");
                 client.DefaultRequestHeaders.Add("X-Rapidapi-Key", _nutritionApiKey);
             });
@@ -47,6 +56,7 @@ namespace FeelingGoodApp
             services.AddHttpClient<ILocationService, LocationService>(client =>
             {
                 client.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/");
+>>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
             });
 
             services.AddControllersWithViews();

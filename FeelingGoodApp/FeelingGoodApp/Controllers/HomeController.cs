@@ -4,6 +4,11 @@ using FeelingGoodApp.Services;
 using FeelingGoodApp.Services.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+<<<<<<< HEAD
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+=======
+>>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,20 +19,42 @@ namespace FeelingGoodApp.Controllers
     {
 
         private readonly INutritionService _service;
+<<<<<<< HEAD
+        private readonly IConfiguration _configuration;
+
+        public HomeController(ILogger<HomeController> logger, INutritionService service, IConfiguration configuration)
+=======
         private readonly ILocationService _locationService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly FeelingGoodContext _context;
 
         public HomeController(INutritionService service, ILocationService locationService, UserManager<ApplicationUser> userManager, FeelingGoodContext context)
+>>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
         {
             _service = service;
+<<<<<<< HEAD
+            _configuration = configuration;
+=======
             _locationService = locationService;
             _userManager = userManager;
             _context = context;
+>>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
         }
         public IActionResult Index()
         {
+<<<<<<< HEAD
+            var apiKey = _configuration["GooglePlaceApiKey"];
+            var latitude = 42.331429; //42.348495 
+            var longitude = -83.045753; //-83.060303
+            var radius = 5000;
+            var types = "gym";
+            var keyword = "gym";
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "FeelingGoodApp");
+=======
             //var results = _locationService.GetPlacesAsync();
+>>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
 
             //var userId = _userManager.GetUserId(User);
             //return View(await _context.EndUser.FirstOrDefaultAsync(x => x.Id == userId)); // need to figure out how to get it to work with Id
@@ -66,6 +93,13 @@ namespace FeelingGoodApp.Controllers
             var activity = await _service.GetExercise(profile);
             return View(activity);
         }
+
+       // [HttpPost]
+       //public async Task<IActionResult> EditExercise(UserProfileViewModel profile)
+       // {
+
+       //     var edit = await _service.
+       // }
 
         public IActionResult Privacy()
         {

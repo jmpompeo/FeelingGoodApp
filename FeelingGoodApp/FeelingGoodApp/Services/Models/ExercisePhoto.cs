@@ -2,8 +2,8 @@
 {
     public class ExercisePhoto
     {
+        public int Id { get; set; }
         public string highres { get; set; }
         public string thumb { get; set; }
-        public bool is_user_uploaded { get; set; }
     }
 }
