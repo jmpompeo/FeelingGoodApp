@@ -16,6 +16,7 @@ namespace FeelingGoodApp
     {
         private string _googleApiKey = null;
         private string _nutritionApiKey = null;
+        private string _nutritionApiKey2 = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,6 +29,7 @@ namespace FeelingGoodApp
         {
             _googleApiKey = Configuration["GoogleApiKey"];
             _nutritionApiKey = Configuration["NutritionAPIKey"];
+            _nutritionApiKey2 = Configuration["NutritionAPIKey2"];
             services.AddDbContext<FeelingGoodContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -39,6 +41,13 @@ namespace FeelingGoodApp
                 client.BaseAddress = new Uri("https://nutritionix-api.p.rapidapi.com/");
                 client.DefaultRequestHeaders.Add("X-Rapidapi-Key", _nutritionApiKey);
             });
+
+            //services.AddHttpClient<INutritionService, NutritionService>(client =>
+            //{
+            //    client.BaseAddress = new Uri("https://trackapi.nutritionix.com/");
+            //    client.DefaultRequestHeaders.Add("98c2fa3e", _nutritionApiKey2);
+            //    client.DefaultRequestHeaders.Add("x-app-id", _nutritionApiKey2);
+            //});
 
             services.AddHttpClient<ILocationService, LocationService>();
 

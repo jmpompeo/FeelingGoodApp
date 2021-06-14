@@ -22,5 +22,6 @@ namespace FeelingGoodApp.Data
         public string Address { get; set; }
 
         public int Age { get; set; }
+        public float Height { get; set; }
     }
 }

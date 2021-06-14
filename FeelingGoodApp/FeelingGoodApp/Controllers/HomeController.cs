@@ -37,13 +37,12 @@ namespace FeelingGoodApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Search(string item_Name)
         {
+            
             var information = await _service.GetFieldsAsync(item_Name);
             NutritionViewModel FoodChoice = new NutritionViewModel(information.hits.FirstOrDefault().fields.item_name, information.hits.FirstOrDefault().fields.nf_calories, information.hits.FirstOrDefault().fields.nf_serving_size_qty);
             //var response = information.hits.FirstOrDefault().fields.nf_calories;
-            return View(FoodChoice);
+            return View(FoodChoice); // need to add the ability to edit the quantity
         }
-
-
 
         public async Task<IActionResult> GetPlaces(string address, int radius, string type)
         {
@@ -63,8 +62,20 @@ namespace FeelingGoodApp.Controllers
         [HttpPost]
         public async Task<IActionResult> ShowExercise(UserProfileViewModel profile)
         {
+            
             var activity = await _service.GetExercise(profile);
             return View(activity);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var food = await _context.MealData.FindAsync(id);
+            return View(food);
         }
 
         public IActionResult Privacy()

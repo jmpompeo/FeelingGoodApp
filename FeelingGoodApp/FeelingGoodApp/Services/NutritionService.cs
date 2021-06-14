@@ -17,6 +17,8 @@ namespace FeelingGoodApp.Services
         private readonly HttpClient _client;
         private readonly IConfiguration _configuration;
         private string NutritionAPIKey => _configuration["NutritionAPIKey"];
+        private string NutritionAPIKey2 => _configuration["NutritionAPIKey2"];
+
         public NutritionService(HttpClient client, IConfiguration configuration)
         {
             _client = client;

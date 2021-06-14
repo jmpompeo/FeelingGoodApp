@@ -23,6 +23,6 @@ namespace FeelingGoodApp.Services.Models
 
         public DbSet<NutritionViewModel> MealData { get; set; }
 
-        public DbSet<FeelingGoodApp.Models.IndexViewModel> IndexViewModel { get; set; }
+        public DbSet<IndexViewModel> IndexViewModel { get; set; }
     }
 }
