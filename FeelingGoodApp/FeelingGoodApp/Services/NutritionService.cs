@@ -8,15 +8,19 @@ using FeelingGoodApp.Services.Models;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace FeelingGoodApp.Services
 {
     public class NutritionService : INutritionService
     {
         private readonly HttpClient _client;
-        public NutritionService(HttpClient client)
+        //private readonly IConfiguration _configuration;
+        //private string NutritionAPIKey => _configuration["NutritionAPIKey"];
+        public NutritionService(HttpClient client, IConfiguration configuration)
         {
             _client = client;
+            //_configuration = configuration;
         }
 
         [HttpPost]
@@ -36,7 +40,6 @@ namespace FeelingGoodApp.Services
             var query = new FormUrlEncodedContent(content);
 
             var response = await _client.PostAsync($"v2/natural/exercise", query);
-            //response.EnsureSuccessStatusCode();
             var results = await response.Content.ReadFromJsonAsync<ExerciseResponse>();
 
             return results.Exercises.First();

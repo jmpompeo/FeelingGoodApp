@@ -20,5 +20,7 @@ namespace FeelingGoodApp.Services.Models
         public DbSet<LocationViewModel> LocationViewModel { get; set; }
         public DbSet<Location> Location { get; set; }
         public DbSet<ApplicationUser> EndUser { get; set; }
+
+        public DbSet<NutritionViewModel> MealData { get; set; }
     }
 }

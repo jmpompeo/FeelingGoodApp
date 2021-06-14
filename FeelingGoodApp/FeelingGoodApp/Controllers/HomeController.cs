@@ -1,15 +1,11 @@
 ﻿using FeelingGoodApp.Data;
-using FeelingGoodApp.Data.Models;
 using FeelingGoodApp.Models;
 using FeelingGoodApp.Services;
 using FeelingGoodApp.Services.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace FeelingGoodApp.Controllers

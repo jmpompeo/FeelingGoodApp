@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +21,8 @@ namespace FeelingGoodApp.Models
 
         }
 
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
         public string item_name { get; set; }
         public float nf_calories { get; set; }
         public int Quantity { get; set; }
