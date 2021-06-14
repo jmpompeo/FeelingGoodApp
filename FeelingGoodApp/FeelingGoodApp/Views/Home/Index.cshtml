@@ -1,20 +1,59 @@
+<<<<<<< HEAD
 ﻿@model UserProfileViewModel
 
 @{
     ViewData["Title"] = "Home Page";
+=======
+﻿@model FeelingGoodApp.Models.IndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    //Layout = "~/Areas/Identity/Pages/Account/_ViewImports.cshtml";
+>>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Index</h1>
+
+<h4>IndexViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Search">
+           
+            <div class="form-group">
+                <label asp-for="item_name" class="control-label"></label>
+                <input asp-for="item_name" class="form-control" />
+                <span asp-validation-for="item_name" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Search" />
+        </form>
+    </div>
+</div>
+<div class="row">
+<div class="col-md-4">
+    <form asp-action="GetPlaces">
+        Address/Zip <input type="text" name="address" /> <br />
+        Radius<select name="radius">
+            <option value="5000">5km</option>
+            <option value="10000">10km</option>
+            <option value="15000">15km</option>
+            <option value="20000">20km</option>
+        </select><br />
+        Activities<select name="type">
+            <option value="gym">Gym</option>
+            <option value="cafe">Coffee Shops</option>
+            <option value="yoga">Yoga</option>
+            <option value="restaurants">Restaurants</option>
+            <option value="market">Markets</option>
+            <option value="hotels">Hotels</option>
+        </select>
+
+        <input type="submit" value="Search" />
+    </form>
+</div>
 </div>
 
-<form asp-controller="Home" asp-action="ShowMeal">
-    <label for="meal">Enter Food Item</label>
-    <input type="text" id="meal" name="meal" />
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
-
+<<<<<<< HEAD
 <form asp-controller="Home" asp-action="ShowExercise">
     <label asp-for="query">Enter Exercise</label>
     <input asp-for="query" required/>
@@ -33,3 +72,12 @@
 
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
+=======
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+>>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e

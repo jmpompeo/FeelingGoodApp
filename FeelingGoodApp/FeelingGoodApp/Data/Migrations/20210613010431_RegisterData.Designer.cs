@@ -4,14 +4,16 @@ using FeelingGoodApp.Services.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FeelingGoodApp.Data.Migrations
 {
     [DbContext(typeof(FeelingGoodContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210613010431_RegisterData")]
+    partial class RegisterData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,25 +138,6 @@ namespace FeelingGoodApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LocationViewModel");
-                });
-
-            modelBuilder.Entity("FeelingGoodApp.Models.NutritionViewModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("item_name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("nf_calories")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MealData");
                 });
 
             modelBuilder.Entity("FeelingGoodApp.Services.Models.ExerciseInfo", b =>
