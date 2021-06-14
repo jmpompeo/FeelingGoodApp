@@ -23,10 +23,10 @@ namespace FeelingGoodApp.Services
             _httpClient = httpClient;
         }
 
-        public async Task<Location> GetLocationAsync(int zipCode)
+        public async Task<Location> GetLocationAsync(string address)
         {
             var locationBaseUrl = "https://maps.googleapis.com/maps/api";
-            var locationEndpoint = $"/geocode/json?address={zipCode}&key={GoogleApiKey}";
+            var locationEndpoint = $"/geocode/json?address={address}&key={GoogleApiKey}";
 
             var response = await _httpClient.GetAsync(locationBaseUrl + locationEndpoint);
 
@@ -45,13 +45,13 @@ namespace FeelingGoodApp.Services
             return location; // you can put a breakpoin here to test 
         }
 
-        public async Task<IList<Place>> GetPlacesAsync(Location location)
+        public async Task<IList<Place>> GetPlacesAsync(Location location, int radius, string type)
         {
             var baseUrl = "https://maps.googleapis.com/maps/api/";
-            var radius = 50000;
-            var types = "gym";
+            //var radius = 50000;
+            //var types = "gym";
 
-            var endpoint = $"place/nearbysearch/json?location={location.Latitude},{location.Longitude}&radius={radius}&keyword={types}&key={GoogleApiKey}";
+            var endpoint = $"place/nearbysearch/json?location={location.Latitude},{location.Longitude}&radius={radius}&keyword={type}&key={GoogleApiKey}";
 
             var response = await _httpClient.GetFromJsonAsync<PlacesResponse>(baseUrl + endpoint);
 
@@ -59,9 +59,16 @@ namespace FeelingGoodApp.Services
             return response.results;
         }
 
-        //public Task<object> GetFitnessAsync(string latitude, string longitude)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<object> GetFitnessAsync(string latitude, string longitude)
+        {
+            var endpoint = $"geocode/something";
+            var queryParameters = $"?location={latitude},{longitude}&key={GoogleApiKey}";
+
+            var url = _httpClient.BaseAddress + endpoint + queryParameters;
+
+            var results = await _httpClient.GetFromJsonAsync<object>(url);
+
+            return results;
+        }
     }
 }

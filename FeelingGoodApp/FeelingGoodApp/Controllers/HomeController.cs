@@ -27,15 +27,17 @@ namespace FeelingGoodApp.Controllers
         }
         public IActionResult Index()
         {
+            //var results = _locationService.GetPlacesAsync();
+
             //var userId = _userManager.GetUserId(User);
             //return View(await _context.EndUser.FirstOrDefaultAsync(x => x.Id == userId)); // need to figure out how to get it to work with Id
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(string Item_Name)
+        public async Task<IActionResult> Search(string item_Name)
         {
-            var information = await _service.GetFieldsAsync(Item_Name);
+            var information = await _service.GetFieldsAsync(item_Name);
             NutritionViewModel FoodChoice = new NutritionViewModel(information.hits.FirstOrDefault().fields.item_name, information.hits.FirstOrDefault().fields.nf_calories, information.hits.FirstOrDefault().fields.nf_serving_size_qty);
             //var response = information.hits.FirstOrDefault().fields.nf_calories;
             return View(FoodChoice);
@@ -43,15 +45,12 @@ namespace FeelingGoodApp.Controllers
 
 
 
-        public async Task<IActionResult> GetLongLat(int zipCode)
+        public async Task<IActionResult> GetPlaces(string address, int radius, string type)
         {
+            var location = await _locationService.GetLocationAsync(address);
 
-            //var getZip = await _userManager.Users.Where(x => x.ZipCode == zipCode);
-
-            var location = await _locationService.GetLocationAsync(zipCode);
-
-            var places = await _locationService.GetPlacesAsync(location);
-
+            var places = await _locationService.GetPlacesAsync(location, radius, type);
+            ViewData["type"] = type;
             return View(places);
         }
 

@@ -22,5 +22,7 @@ namespace FeelingGoodApp.Services.Models
         public DbSet<ApplicationUser> EndUser { get; set; }
 
         public DbSet<NutritionViewModel> MealData { get; set; }
+
+        public DbSet<FeelingGoodApp.Models.IndexViewModel> IndexViewModel { get; set; }
     }
 }

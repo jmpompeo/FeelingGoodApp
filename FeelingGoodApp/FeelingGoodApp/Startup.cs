@@ -14,6 +14,8 @@ namespace FeelingGoodApp
 {
     public class Startup
     {
+        private string _googleApiKey = null;
+        private string _nutritionApiKey = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,6 +26,8 @@ namespace FeelingGoodApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            _googleApiKey = Configuration["GoogleApiKey"];
+            _nutritionApiKey = Configuration["NutritionAPIKey"];
             services.AddDbContext<FeelingGoodContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -33,8 +37,12 @@ namespace FeelingGoodApp
             services.AddHttpClient<INutritionService, NutritionService>(client =>
             {
                 client.BaseAddress = new Uri("https://nutritionix-api.p.rapidapi.com/");
-                client.DefaultRequestHeaders.Add("X-Rapidapi-Key", "19ca1a2deamsha9d4dd326efb3f6p1d87dbjsn37d56dc27842");
+                client.DefaultRequestHeaders.Add("X-Rapidapi-Key", _nutritionApiKey);
             });
+
+            services.AddHttpClient<ILocationService, LocationService>();
+
+
 
             services.AddHttpClient<ILocationService, LocationService>(client =>
             {
