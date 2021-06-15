@@ -7,14 +7,14 @@
 
 <h1>Index</h1>
 
-<h4>IndexViewModel</h4>
+<h4>Welcome To Feeling Good</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Search">
            
             <div class="form-group">
-                <label asp-for="item_name" class="control-label"></label>
+                <label asp-for="item_name" class="control-label">Type in a food item to see more detailed nutrition facts</label>
                 <input asp-for="item_name" class="form-control" />
                 <span asp-validation-for="item_name" class="text-danger"></span>
             </div>
@@ -22,6 +22,8 @@
         </form>
     </div>
 </div>
+<br />
+
 <div class="row">
 <div class="col-md-4">
     <form asp-action="GetPlaces">
@@ -46,7 +48,7 @@
 </div>
 </div>
 
-<div class="row">
+@*<div class="row">
     <div class="col-md-4">
         <form asp-action="ShowExercise">
 
@@ -81,7 +83,7 @@
 </div>
 <div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

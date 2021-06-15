@@ -4,6 +4,7 @@ using FeelingGoodApp.Services;
 using FeelingGoodApp.Services.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -76,6 +77,49 @@ namespace FeelingGoodApp.Controllers
 
             var food = await _context.MealData.FindAsync(id);
             return View(food);
+        }
+
+        public async Task<IActionResult> AddToMeals(NutritionViewModel Meal)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(Meal);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(Meal);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, NutritionViewModel model)
+        {
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(model);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                    if (id != model.Id)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
         }
 
         public IActionResult Privacy()
