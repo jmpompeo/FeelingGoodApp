@@ -1,8 +1,15 @@
+<<<<<<< HEAD
+﻿@model UserProfileViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+=======
 ﻿@model FeelingGoodApp.Models.IndexViewModel
 
 @{
     ViewData["Title"] = "Index";
     //Layout = "~/Areas/Identity/Pages/Account/_ViewImports.cshtml";
+>>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
 }
 
 <h1>Index</h1>
@@ -48,6 +55,7 @@
 </div>
 </div>
 
+<<<<<<< HEAD
 @*<div class="row">
     <div class="col-md-4">
         <form asp-action="ShowExercise">
@@ -81,6 +89,28 @@
         </form>
     </div>
 </div>
+=======
+<<<<<<< HEAD
+<form asp-controller="Home" asp-action="ShowExercise">
+    <label asp-for="query">Enter Exercise</label>
+    <input asp-for="query" required/>
+
+    <label asp-for="gender"></label>
+    <input asp-for="gender" />
+
+    <label asp-for="weight_kg"></label>
+    <input type="number" asp-for="weight_kg" min="10" max="250" step="0.01" /> 
+
+    <label asp-for="height_cm"></label>
+    <input type="number" asp-for="height_cm" min="40" max="300" step="0.01"/> 
+    
+    <label asp-for="age"></label>
+    <input type="number" asp-for="age" min="13" max="120"/>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+=======
+>>>>>>> 23b48ef0ecf6db865d801bf3cb40d968f40258a4
 <div>
     <a asp-action="Index">Back to List</a>
 </div>*@
@@ -88,3 +118,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+>>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
