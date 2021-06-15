@@ -4,14 +4,16 @@ using FeelingGoodApp.Services.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FeelingGoodApp.Data.Migrations
 {
     [DbContext(typeof(FeelingGoodContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210614202017_RegisterDataWithHeight")]
+    partial class RegisterDataWithHeight
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,15 +130,6 @@ namespace FeelingGoodApp.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Height_cm")
-                        .HasColumnType("real");
-
                     b.Property<string>("Query")
                         .HasColumnType("nvarchar(max)");
 
@@ -145,9 +138,6 @@ namespace FeelingGoodApp.Data.Migrations
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Weight_kg")
-                        .HasColumnType("real");
 
                     b.Property<string>("item_name")
                         .HasColumnType("nvarchar(max)");

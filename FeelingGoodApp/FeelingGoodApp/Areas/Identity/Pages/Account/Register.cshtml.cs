@@ -66,6 +66,9 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
             public string Address { get; set; }
 
             [Required]
+            public float Height { get; set; }
+
+            [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -89,7 +92,15 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser
+                { UserName = Input.Email, 
+                  Email = Input.Email, 
+                  Address = Input.Address,
+                  Age = Input.Age,
+                  GoalWeight = Input.GoalWeight,
+                  Height = Input.Height,
+                  ZipCode = Input.ZipCode
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

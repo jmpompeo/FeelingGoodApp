@@ -23,7 +23,12 @@ namespace FeelingGoodApp.Services
 
 =======
         private string NutritionAPIKey => _configuration["NutritionAPIKey"];
+<<<<<<< HEAD
+        private string NutritionAPIKey2 => _configuration["NutritionAPIKey2"];
+
+=======
 >>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
+>>>>>>> 23b48ef0ecf6db865d801bf3cb40d968f40258a4
         public NutritionService(HttpClient client, IConfiguration configuration)
         {
             _client = client;

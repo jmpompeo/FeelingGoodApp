@@ -30,7 +30,18 @@
         </dd>
     </dl>
 </div>
+
+<td>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+</td>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>
+<form asp-action="AddToMeals">
+    <div class="form-group">
+        <input type="submit" value="AddToMeals" class="btn btn-primary" />
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
