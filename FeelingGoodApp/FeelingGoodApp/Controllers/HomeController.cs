@@ -19,9 +19,6 @@ namespace FeelingGoodApp.Controllers
 
         private readonly INutritionService _service;
         private readonly IConfiguration _configuration;
-
-        //public HomeController(ILogger<HomeController> logger, INutritionService service, IConfiguration configuration)
-
         private readonly ILocationService _locationService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly FeelingGoodContext _context;
@@ -36,10 +33,6 @@ namespace FeelingGoodApp.Controllers
         }
         public IActionResult Index()
         {
-            //var results = _locationService.GetPlacesAsync();
-
-            //var userId = _userManager.GetUserId(User);
-            //return View(await _context.EndUser.FirstOrDefaultAsync(x => x.Id == userId)); // need to figure out how to get it to work with Id
             return View();
         }
 
@@ -136,7 +129,6 @@ namespace FeelingGoodApp.Controllers
 
        //     var edit = await _service.
        // }
-
 
         public IActionResult Privacy()
         {

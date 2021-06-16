@@ -42,13 +42,14 @@ namespace FeelingGoodApp.Services
             var query = new FormUrlEncodedContent(content);
 
             var response = await _client.PostAsync($"v2/natural/exercise", query);
-            //response.EnsureSuccessStatusCode();
+
             var results = await response.Content.ReadFromJsonAsync<ExerciseResponse>();
 
             return results.Exercises.First();
         }
 
         public ExerciseRequest MapUserProfileToExerciseRequest(UserProfileViewModel profile)
+
         {
             return new ExerciseRequest
             {
