@@ -5,10 +5,7 @@ using FeelingGoodApp.Models;
 using System.Net.Http.Json;
 using System.Text.Json;
 using FeelingGoodApp.Services.Models;
-<<<<<<< HEAD
-=======
 using System.ComponentModel;
->>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +18,7 @@ namespace FeelingGoodApp.Services
         private readonly IConfiguration _configuration;
         private string NutritionAPIKey => _configuration["NutritionAPIKey"];
         private string NutritionAPIKey2 => _configuration["NutritionAPIKey2"];
-        
+
         public NutritionService(HttpClient client, IConfiguration configuration)
         {
             _client = client;
@@ -45,46 +42,14 @@ namespace FeelingGoodApp.Services
             var query = new FormUrlEncodedContent(content);
 
             var response = await _client.PostAsync($"v2/natural/exercise", query);
+
             var results = await response.Content.ReadFromJsonAsync<ExerciseResponse>();
 
             return results.Exercises.First();
         }
 
-        [HttpPost]
-        public async Task<ExerciseInfo> GetExercise(UserProfileViewModel profile)
-        {
-            var exerciseRequest = MapUserProfileToExerciseRequest(profile);
+        public ExerciseRequest MapUserProfileToExerciseRequest(UserProfileViewModel profile)
 
-            var content = new Dictionary<string, string>
-            {
-                { "query", exerciseRequest.Query },
-                { "gender", exerciseRequest.Gender },
-                { "weight_kg", exerciseRequest.WeightKg },
-                { "height_cm", exerciseRequest.HeightCm },
-                { "age" , exerciseRequest.Age }
-            };
-
-            var query = new FormUrlEncodedContent(content);
-
-            var response = await _client.PostAsync($"v2/natural/exercise", query);
-            //response.EnsureSuccessStatusCode();
-            var results = await response.Content.ReadFromJsonAsync<ExerciseResponse>();
-
-            return results.Exercises.First();
-        }
-
-        private ExerciseRequest MapUserProfileToExerciseRequest(UserProfileViewModel profile)
-        {
-            return new ExerciseRequest
-            {
-                Query = profile.query,
-                Gender = profile.gender,
-                WeightKg = profile.weight_kg.ToString(),
-                HeightCm = profile.height_cm.ToString(),
-                Age = profile.age.ToString()
-            };
-            
-        private ExerciseRequest MapUserProfileToExerciseRequest(UserProfileViewModel profile)
         {
             return new ExerciseRequest
             {
@@ -95,12 +60,9 @@ namespace FeelingGoodApp.Services
                 Age = profile.age.ToString()
             };
         }
-
         public async Task<NutritionFactsResults> GetFieldsAsync(string item_name)
         {
             return await _client.GetFromJsonAsync<NutritionFactsResults>($"v1_1/search/{item_name}?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories");
         }
-
-
     }
 }

@@ -33,7 +33,6 @@ namespace FeelingGoodApp
             services.AddDbContext<FeelingGoodContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
 
@@ -45,7 +44,7 @@ namespace FeelingGoodApp
                 client.BaseAddress = new Uri("https://trackapi.nutritionix.com/");
                 client.DefaultRequestHeaders.Add("x-app-id", Configuration["NutritionAppId"]);
                 client.DefaultRequestHeaders.Add("x-app-key", Configuration["NutritionAppKey"]);
-
+              
                 client.BaseAddress = new Uri("https://nutritionix-api.p.rapidapi.com/");
                 client.DefaultRequestHeaders.Add("X-Rapidapi-Key", _nutritionApiKey);
             });

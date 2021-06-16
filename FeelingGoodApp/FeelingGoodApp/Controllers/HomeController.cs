@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace FeelingGoodApp.Controllers
@@ -18,13 +19,11 @@ namespace FeelingGoodApp.Controllers
 
         private readonly INutritionService _service;
         private readonly IConfiguration _configuration;
-
-        public HomeController(ILogger<HomeController> logger, INutritionService service, IConfiguration configuration)
         private readonly ILocationService _locationService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly FeelingGoodContext _context;
 
-        public HomeController(INutritionService service, ILocationService locationService, UserManager<ApplicationUser> userManager, FeelingGoodContext context)
+        public HomeController(INutritionService service, ILocationService locationService, UserManager<ApplicationUser> userManager, FeelingGoodContext context, IConfiguration configuration)
         {
             _service = service;
             _configuration = configuration;
@@ -34,18 +33,6 @@ namespace FeelingGoodApp.Controllers
         }
         public IActionResult Index()
         {
-            var apiKey = _configuration["GooglePlaceApiKey"];
-            var latitude = 42.331429; //42.348495 
-            var longitude = -83.045753; //-83.060303
-            var radius = 5000;
-            var types = "gym";
-            var keyword = "gym";
-
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "FeelingGoodApp");
-            //var results = _locationService.GetPlacesAsync();
-            //var userId = _userManager.GetUserId(User);
-            //return View(await _context.EndUser.FirstOrDefaultAsync(x => x.Id == userId)); // need to figure out how to get it to work with Id
             return View();
         }
 
@@ -81,6 +68,7 @@ namespace FeelingGoodApp.Controllers
             var activity = await _service.GetExercise(profile);
             return View(activity);
         }
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -134,6 +122,7 @@ namespace FeelingGoodApp.Controllers
             }
             return View(model);
         }
+
        // [HttpPost]
        //public async Task<IActionResult> EditExercise(UserProfileViewModel profile)
        // {
