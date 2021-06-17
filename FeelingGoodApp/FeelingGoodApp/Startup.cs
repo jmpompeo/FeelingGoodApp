@@ -30,6 +30,7 @@ namespace FeelingGoodApp
             _googleApiKey = Configuration["GoogleApiKey"];
             _nutritionApiKey = Configuration["NutritionAPIKey"];
             _nutritionApiKey2 = Configuration["NutritionAPIKey2"];
+
             services.AddDbContext<FeelingGoodContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -55,7 +56,7 @@ namespace FeelingGoodApp
             //    client.DefaultRequestHeaders.Add("x-app-id", _nutritionApiKey2);
             //});
 
-            services.AddHttpClient<ILocationService, LocationService>();
+            //services.AddHttpClient<ILocationService, LocationService>();
 
 
 

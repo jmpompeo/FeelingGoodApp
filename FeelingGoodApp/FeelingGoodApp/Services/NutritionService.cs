@@ -3,9 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FeelingGoodApp.Models;
 using System.Net.Http.Json;
-using System.Text.Json;
 using FeelingGoodApp.Services.Models;
-using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
@@ -63,5 +61,7 @@ namespace FeelingGoodApp.Services
         {
             return await _client.GetFromJsonAsync<NutritionFactsResults>($"v1_1/search/{item_name}?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories");
         }
+
+        //public async Task<>
     }
 }
