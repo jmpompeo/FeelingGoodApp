@@ -1,121 +1,19 @@
-<<<<<<< HEAD
-﻿@model UserProfileViewModel
-
-@{
-    ViewData["Title"] = "Home Page";
-=======
 ﻿@model FeelingGoodApp.Models.IndexViewModel
 
 @{
     ViewData["Title"] = "Index";
-    //Layout = "~/Areas/Identity/Pages/Account/_ViewImports.cshtml";
->>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e
 }
 
 <h1>Index</h1>
 
 <h4>Welcome To Feeling Good</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Search">
-           
-            <div class="form-group">
-                <label asp-for="item_name" class="control-label">Type in a food item to see more detailed nutrition facts</label>
-                <input asp-for="item_name" class="form-control" />
-                <span asp-validation-for="item_name" class="text-danger"></span>
-            </div>
-            <input type="submit" value="Search" />
-        </form>
-    </div>
-</div>
+
+@*<input type="button" color="red" name="button" class="button1" value="Submit" />
+
+
 <br />
 
-<div class="row">
-<div class="col-md-4">
-    <form asp-action="GetPlaces">
-        Address/Zip <input type="text" name="address" /> <br />
-        Radius<select name="radius">
-            <option value="5000">5km</option>
-            <option value="10000">10km</option>
-            <option value="15000">15km</option>
-            <option value="20000">20km</option>
-        </select><br />
-        Activities<select name="type">
-            <option value="gym">Gym</option>
-            <option value="cafe">Coffee Shops</option>
-            <option value="yoga">Yoga</option>
-            <option value="restaurants">Restaurants</option>
-            <option value="market">Markets</option>
-            <option value="hotels">Hotels</option>
-        </select>
-
-        <input type="submit" value="Search" />
-    </form>
-</div>
-</div>
-
-<<<<<<< HEAD
-@*<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ShowExercise">
-
-            <div class="form-group">
-                <label asp-for="Query" class="control-label"></label>
-                <input asp-for="Query" class="form-control" />
-                <span asp-validation-for="Query" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Height_cm" class="control-label"></label>
-                <input asp-for="Height_cm" class="form-control" />
-                <span asp-validation-for="Height_cm" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Weight_kg" class="control-label"></label>
-                <input asp-for="Weight_kg" class="form-control" />
-                <span asp-validation-for="Weight_kg" class="text-danger"></span>
-            </div>
-            <input type="submit" value="Search" />
-        </form>
-    </div>
-</div>
-=======
-<<<<<<< HEAD
-<form asp-controller="Home" asp-action="ShowExercise">
-    <label asp-for="query">Enter Exercise</label>
-    <input asp-for="query" required/>
-
-    <label asp-for="gender"></label>
-    <input asp-for="gender" />
-
-    <label asp-for="weight_kg"></label>
-    <input type="number" asp-for="weight_kg" min="10" max="250" step="0.01" /> 
-
-    <label asp-for="height_cm"></label>
-    <input type="number" asp-for="height_cm" min="40" max="300" step="0.01"/> 
-    
-    <label asp-for="age"></label>
-    <input type="number" asp-for="age" min="13" max="120"/>
-
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
-=======
->>>>>>> 23b48ef0ecf6db865d801bf3cb40d968f40258a4
 <div>
     <a asp-action="Index">Back to List</a>
 </div>*@
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
->>>>>>> fc26f106d04073438c3aae6dd2c0c72dcef6e41e

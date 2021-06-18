@@ -19,12 +19,12 @@ namespace FeelingGoodApp.Controllers
         private readonly INutritionService _service;
         private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger, INutritionService service, IConfiguration configuration)
+        //public HomeController(ILogger<HomeController> logger, INutritionService service, IConfiguration configuration)
         private readonly ILocationService _locationService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly FeelingGoodContext _context;
 
-        public HomeController(INutritionService service, ILocationService locationService, UserManager<ApplicationUser> userManager, FeelingGoodContext context)
+        public HomeController(INutritionService service, ILocationService locationService, IConfiguration configuration, UserManager<ApplicationUser> userManager, FeelingGoodContext context)
         {
             _service = service;
             _configuration = configuration;
@@ -32,41 +32,13 @@ namespace FeelingGoodApp.Controllers
             _userManager = userManager;
             _context = context;
         }
+
         public IActionResult Index()
         {
-            var apiKey = _configuration["GooglePlaceApiKey"];
-            var latitude = 42.331429; //42.348495 
-            var longitude = -83.045753; //-83.060303
-            var radius = 5000;
-            var types = "gym";
-            var keyword = "gym";
-
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "FeelingGoodApp");
-            //var results = _locationService.GetPlacesAsync();
-            //var userId = _userManager.GetUserId(User);
-            //return View(await _context.EndUser.FirstOrDefaultAsync(x => x.Id == userId)); // need to figure out how to get it to work with Id
-            return View();
+            return View(new IndexViewModel());
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Search(string item_Name)
-        {
-            
-            var information = await _service.GetFieldsAsync(item_Name);
-            NutritionViewModel FoodChoice = new NutritionViewModel(information.hits.FirstOrDefault().fields.item_name, information.hits.FirstOrDefault().fields.nf_calories, information.hits.FirstOrDefault().fields.nf_serving_size_qty);
-            //var response = information.hits.FirstOrDefault().fields.nf_calories;
-            return View(FoodChoice); // need to add the ability to edit the quantity
-        }
-
-        public async Task<IActionResult> GetPlaces(string address, int radius, string type)
-        {
-            var location = await _locationService.GetLocationAsync(address);
-
-            var places = await _locationService.GetPlacesAsync(location, radius, type);
-            ViewData["type"] = type;
-            return View(places);
-        }
+       
 
         //public async Task<IActionResult> ShowMeal()
         //{
@@ -74,13 +46,6 @@ namespace FeelingGoodApp.Controllers
         //    return View(response.Breakfast);
         //}
 
-        [HttpPost]
-        public async Task<IActionResult> ShowExercise(UserProfileViewModel profile)
-        {
-            
-            var activity = await _service.GetExercise(profile);
-            return View(activity);
-        }
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

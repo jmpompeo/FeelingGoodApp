@@ -29,10 +29,20 @@ namespace FeelingGoodApp.Services
             var locationEndpoint = $"/geocode/json?address={address}&key={GoogleApiKey}";
 
             var response = await _httpClient.GetAsync(locationBaseUrl + locationEndpoint);
-
+            
             var results = await response.Content.ReadAsStringAsync(); // returns a string of Json Data
 
             JObject jsonObject = JObject.Parse(results); // Represents JSON Data as an Object
+
+            if (jsonObject["status"].ToString() == "ZERO_RESULTS")
+            {
+                return null;
+            }
+
+            if (jsonObject["results"].Count() < 1)
+            {
+                return null;
+            }
 
             JArray jArray = (JArray)jsonObject["results"]; // Access's the "results" property of the JObject which is a collection, which it why who use a JArray
 

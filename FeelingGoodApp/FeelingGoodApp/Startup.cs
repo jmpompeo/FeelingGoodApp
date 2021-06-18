@@ -28,15 +28,16 @@ namespace FeelingGoodApp
         public void ConfigureServices(IServiceCollection services)
         {
             _googleApiKey = Configuration["GoogleApiKey"];
-            _nutritionApiKey = Configuration["NutritionAPIKey"];
-            _nutritionApiKey2 = Configuration["NutritionAPIKey2"];
+            _nutritionApiKey = Configuration["NutritionAppId"];
+            _nutritionApiKey2 = Configuration["NutritionAppKey"];
+
             services.AddDbContext<FeelingGoodContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false);
 
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<FeelingGoodContext>();
 
             services.AddHttpClient<INutritionService, NutritionService>(client =>
@@ -46,8 +47,8 @@ namespace FeelingGoodApp
                 client.DefaultRequestHeaders.Add("x-app-id", Configuration["NutritionAppId"]);
                 client.DefaultRequestHeaders.Add("x-app-key", Configuration["NutritionAppKey"]);
 
-                client.BaseAddress = new Uri("https://nutritionix-api.p.rapidapi.com/");
-                client.DefaultRequestHeaders.Add("X-Rapidapi-Key", _nutritionApiKey);
+                //client.BaseAddress = new Uri("https://nutritionix-api.p.rapidapi.com/");
+                //client.DefaultRequestHeaders.Add("X-Rapidapi-Key", _nutritionApiKey);
             });
 
             //services.AddHttpClient<INutritionService, NutritionService>(client =>
