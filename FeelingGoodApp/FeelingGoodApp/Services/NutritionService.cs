@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FeelingGoodApp.Models;
@@ -6,7 +6,9 @@ using System.Net.Http.Json;
 using FeelingGoodApp.Services.Models;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
 
 namespace FeelingGoodApp.Services
 {
@@ -40,13 +42,14 @@ namespace FeelingGoodApp.Services
             var query = new FormUrlEncodedContent(content);
 
             var response = await _client.PostAsync($"v2/natural/exercise", query);
+            response.EnsureSuccessStatusCode();
 
             var results = await response.Content.ReadFromJsonAsync<ExerciseResponse>();
 
             return results.Exercises.First();
         }
 
-        public ExerciseRequest MapUserProfileToExerciseRequest(UserProfileViewModel profile)
+        private ExerciseRequest MapUserProfileToExerciseRequest(UserProfileViewModel profile)
 
         {
             return new ExerciseRequest
@@ -63,6 +66,10 @@ namespace FeelingGoodApp.Services
             return await _client.GetFromJsonAsync<NutritionFactsResults>($"v1_1/search/{item_name}?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories");
         }
 
-        //public async Task<>
+        public Task<UserNutrition> GetName()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
+

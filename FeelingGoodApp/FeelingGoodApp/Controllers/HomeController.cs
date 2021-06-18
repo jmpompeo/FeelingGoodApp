@@ -21,39 +21,23 @@ namespace FeelingGoodApp.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly FeelingGoodContext _context;
 
-        public HomeController(INutritionService service, ILocationService locationService, UserManager<ApplicationUser> userManager, FeelingGoodContext context, IConfiguration configuration)
+        public HomeController(INutritionService service, ILocationService locationService, IConfiguration configuration, UserManager<ApplicationUser> userManager, FeelingGoodContext context)
         {
             _service = service;
             _configuration = configuration;
             _locationService = locationService;
             _userManager = userManager;
             _context = context;
-        }
+            
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Search(string item_Name)
+        public IActionResult Index()
         {
-            
-            var information = await _service.GetFieldsAsync(item_Name);
-            NutritionViewModel FoodChoice = new NutritionViewModel(information.hits.FirstOrDefault().fields.item_name, information.hits.FirstOrDefault().fields.nf_calories, information.hits.FirstOrDefault().fields.nf_serving_size_qty);
-            //var response = information.hits.FirstOrDefault().fields.nf_calories;
-            return View(FoodChoice); // need to add the ability to edit the quantity
+            return View(new IndexViewModel());
         }
-
-        public async Task<IActionResult> GetPlaces(string address, int radius, string type)
-        {
-            var location = await _locationService.GetLocationAsync(address);
-
-            var places = await _locationService.GetPlacesAsync(location, radius, type);
-            ViewData["type"] = type;
-            return View(places);
-        }
-
-
 
         //public async Task<IActionResult> GetGoals()
         //{
@@ -65,14 +49,6 @@ namespace FeelingGoodApp.Controllers
         //    var response = await _service.GetName();
         //    return View(response.Breakfast);
         //}
-
-        [HttpPost]
-        public async Task<IActionResult> ShowExercise(UserProfileViewModel profile)
-        {
-            
-            var activity = await _service.GetExercise(profile);
-            return View(activity);
-        }
 
         public async Task<IActionResult> Edit(int? id)
         {
