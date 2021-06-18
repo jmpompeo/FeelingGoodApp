@@ -6,10 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace FeelingGoodApp.Controllers
@@ -54,6 +52,13 @@ namespace FeelingGoodApp.Controllers
             ViewData["type"] = type;
             return View(places);
         }
+
+
+
+        //public async Task<IActionResult> GetGoals()
+        //{
+
+        //}
 
         //public async Task<IActionResult> ShowMeal()
         //{
