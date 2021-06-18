@@ -1,7 +1,9 @@
-﻿using FeelingGoodApp.Models;
-using FeelingGoodApp.Services.Models;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using FeelingGoodApp.Models;
+using System.Net.Http.Json;
+using FeelingGoodApp.Services.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -23,7 +25,6 @@ namespace FeelingGoodApp.Services
             _configuration = configuration;
         }
 
-
         [HttpPost]
         public async Task<ExerciseInfo> GetExercise(UserProfileViewModel profile)
         {
@@ -42,12 +43,14 @@ namespace FeelingGoodApp.Services
 
             var response = await _client.PostAsync($"v2/natural/exercise", query);
             response.EnsureSuccessStatusCode();
+
             var results = await response.Content.ReadFromJsonAsync<ExerciseResponse>();
 
             return results.Exercises.First();
         }
 
         private ExerciseRequest MapUserProfileToExerciseRequest(UserProfileViewModel profile)
+
         {
             return new ExerciseRequest
             {
@@ -58,7 +61,6 @@ namespace FeelingGoodApp.Services
                 Age = profile.age.ToString()
             };
         }
-
         public async Task<NutritionFactsResults> GetFieldsAsync(string item_name)
         {
             return await _client.GetFromJsonAsync<NutritionFactsResults>($"v1_1/search/{item_name}?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories");

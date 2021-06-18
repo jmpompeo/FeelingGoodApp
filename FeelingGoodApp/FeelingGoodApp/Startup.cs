@@ -58,7 +58,7 @@ namespace FeelingGoodApp
             //    client.DefaultRequestHeaders.Add("x-app-id", _nutritionApiKey2);
             //});
 
-            services.AddHttpClient<ILocationService, LocationService>();
+            //services.AddHttpClient<ILocationService, LocationService>();
 
 
 
