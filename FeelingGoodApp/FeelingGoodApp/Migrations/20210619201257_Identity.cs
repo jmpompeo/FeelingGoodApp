@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FeelingGoodApp.Data.Migrations
+namespace FeelingGoodApp.Migrations
 {
-    public partial class AddExercise : Migration
+    public partial class Identity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,6 +43,7 @@ namespace FeelingGoodApp.Data.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     GoalWeight = table.Column<double>(nullable: false),
+                    Weight = table.Column<double>(nullable: false),
                     ZipCode = table.Column<int>(nullable: false),
                     Address = table.Column<string>(nullable: true),
                     Age = table.Column<int>(nullable: false),
@@ -188,7 +189,7 @@ namespace FeelingGoodApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExerciseInfo",
+                name: "Exercises",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -201,25 +202,19 @@ namespace FeelingGoodApp.Data.Migrations
                     Compendium_Code = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    user_input = table.Column<string>(nullable: true),
-                    duration_min = table.Column<int>(nullable: false),
-                    met = table.Column<int>(nullable: false),
-                    nf_calories = table.Column<int>(nullable: false),
-                    name = table.Column<string>(nullable: true),
-                    description = table.Column<string>(nullable: true),
                     ExerciseInfoId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExerciseInfo", x => x.Id);
+                    table.PrimaryKey("PK_Exercises", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExerciseInfo_ExerciseInfo_ExerciseInfoId",
+                        name: "FK_Exercises_Exercises_ExerciseInfoId",
                         column: x => x.ExerciseInfoId,
-                        principalTable: "ExerciseInfo",
+                        principalTable: "Exercises",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ExerciseInfo_ExercisePhoto_photoId",
+                        name: "FK_Exercises_ExercisePhoto_photoId",
                         column: x => x.photoId,
                         principalTable: "ExercisePhoto",
                         principalColumn: "Id",
@@ -266,13 +261,13 @@ namespace FeelingGoodApp.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExerciseInfo_ExerciseInfoId",
-                table: "ExerciseInfo",
+                name: "IX_Exercises_ExerciseInfoId",
+                table: "Exercises",
                 column: "ExerciseInfoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExerciseInfo_photoId",
-                table: "ExerciseInfo",
+                name: "IX_Exercises_photoId",
+                table: "Exercises",
                 column: "photoId");
         }
 
@@ -294,7 +289,7 @@ namespace FeelingGoodApp.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ExerciseInfo");
+                name: "Exercises");
 
             migrationBuilder.DropTable(
                 name: "MealData");

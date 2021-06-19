@@ -16,6 +16,8 @@ namespace FeelingGoodApp.Data
         [Display(Name = "Goal Weight")]
         public double GoalWeight { get; set; }
 
+        public double Weight { get; set; }
+
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
 

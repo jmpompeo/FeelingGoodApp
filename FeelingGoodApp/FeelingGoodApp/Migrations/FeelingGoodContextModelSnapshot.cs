@@ -4,16 +4,14 @@ using FeelingGoodApp.Services.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace FeelingGoodApp.Data.Migrations
+namespace FeelingGoodApp.Migrations
 {
     [DbContext(typeof(FeelingGoodContext))]
-    [Migration("20210619015354_Identity")]
-    partial class Identity
+    partial class FeelingGoodContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,6 +88,9 @@ namespace FeelingGoodApp.Data.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
 
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
