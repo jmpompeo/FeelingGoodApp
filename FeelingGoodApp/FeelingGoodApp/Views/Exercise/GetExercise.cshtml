@@ -1,0 +1,38 @@
+﻿@model FeelingGoodApp.Models.UserProfileViewModel
+
+@{
+    ViewData["Title"] = "GetExercise";
+}
+
+<h1>GetExercise</h1>
+
+<h4>UserProfileViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Exercise" asp-action="ShowExercise">
+            <label asp-for="query">Enter Exercise</label>
+            <input asp-for="query" required /> <br />
+
+            <label asp-for="gender"></label>
+            <input asp-for="gender" /><br />
+
+            <label asp-for="weight_kg"></label>
+            <input type="number" asp-for="weight_kg" min="10" max="250" step="0.01" /><br />
+
+            <label asp-for="height_cm"></label>
+            <input type="number" asp-for="height_cm" min="40" max="300" step="0.01" /><br />
+
+            <label asp-for="age"></label>
+            <input type="number" asp-for="age" min="13" max="120" /><br />
+
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+     
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
