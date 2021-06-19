@@ -6,9 +6,7 @@ using System.Net.Http.Json;
 using FeelingGoodApp.Services.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace FeelingGoodApp.Services
 {
@@ -49,7 +47,7 @@ namespace FeelingGoodApp.Services
             return results.Exercises.First();
         }
 
-        private ExerciseRequest MapUserProfileToExerciseRequest(UserProfileViewModel profile)
+        public ExerciseRequest MapUserProfileToExerciseRequest(UserProfileViewModel profile)
 
         {
             return new ExerciseRequest

@@ -15,23 +15,19 @@ namespace FeelingGoodApp.Controllers
     public class HomeController : Controller
     {
 
-        private readonly INutritionService _service;
+        //private readonly INutritionService _service;
         private readonly IConfiguration _configuration;
         private readonly ILocationService _locationService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly FeelingGoodContext _context;
 
-        public HomeController(INutritionService service, ILocationService locationService, IConfiguration configuration, UserManager<ApplicationUser> userManager, FeelingGoodContext context)
+        public HomeController(/*INutritionService service*/ ILocationService locationService, IConfiguration configuration, UserManager<ApplicationUser> userManager, FeelingGoodContext context)
         {
-            _service = service;
+            //_service = service;
             _configuration = configuration;
             _locationService = locationService;
             _userManager = userManager;
             _context = context;
-            
-        public IActionResult Index()
-        {
-            return View();
         }
 
         public IActionResult Index()
