@@ -19,6 +19,8 @@ namespace FeelingGoodApp.Services.Models
         
         public DbSet<ExerciseInfo> Exercises { get; set; }
         
+        public DbSet<FeelingGoodApp.Models.UserProfileViewModel> UserProfileViewModel { get; set; }
+        
         //public DbSet<FeelingGoodApp.Models.UserProfileViewModel> UserProfileViewModel { get; set; }
         //public DbSet<ExerciseRequest> EndUser { get; set; }
         //public DbSet<Exercises> Exercises { get; set; }
