@@ -22,14 +22,14 @@ namespace FeelingGoodApp.Controllers
             return View();
         }
 
-        public async Task<IActionResult> GetPlaces(string address, int radius, string type)
+        public async Task<IActionResult> GetPlaces(string address, int radius, string type) 
         {
             if (string.IsNullOrEmpty(address))
             {
                 return View(nameof(SearchPlaces), new IndexViewModel { ErrorMessage = "Address cannot be empty" });
                 //return BadRequest("Address cannot be empty");
             }
-
+          
             var location = await _locationService.GetLocationAsync(address);
 
             if (location is null)

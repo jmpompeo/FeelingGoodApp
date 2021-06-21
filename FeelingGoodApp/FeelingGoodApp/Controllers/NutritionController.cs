@@ -12,8 +12,14 @@ namespace FeelingGoodApp.Controllers
     public class NutritionController : Controller
     {
         private readonly INutritionService _service;
+
+        public NutritionController(INutritionService nutritionService)
+        {
+            _service = nutritionService;
+        }
+
         // GET: NutritionController
-        public async Task<ActionResult> Search(string item_Name)
+        public async Task<ActionResult> Search(string item_Name) 
         {
             var information = await _service.GetFieldsAsync(item_Name);
             NutritionViewModel FoodChoice = new NutritionViewModel(information.hits.FirstOrDefault().fields.item_name, information.hits.FirstOrDefault().fields.nf_calories, information.hits.FirstOrDefault().fields.nf_serving_size_qty);

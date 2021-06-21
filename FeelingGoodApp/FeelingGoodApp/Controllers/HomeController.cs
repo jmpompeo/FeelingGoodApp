@@ -25,7 +25,7 @@ namespace FeelingGoodApp.Controllers
         private readonly FeelingGoodContext _context;
 
         public HomeController(INutritionService service, ILocationService locationService, IConfiguration configuration, UserManager<ApplicationUser> userManager, FeelingGoodContext context)
-        {
+        {          
             _service = service;
             _configuration = configuration;
             _locationService = locationService;
@@ -38,7 +38,10 @@ namespace FeelingGoodApp.Controllers
             return View(new IndexViewModel());
         }
 
-       
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
 
         //public async Task<IActionResult> ShowMeal()
         //{

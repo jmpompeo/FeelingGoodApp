@@ -5,7 +5,9 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FeelingGoodApp.Services
@@ -59,9 +61,13 @@ namespace FeelingGoodApp.Services
             };
         }
 
-        public async Task<NutritionFactsResults> GetFieldsAsync(string item_name)
+        public async Task<NutritionFactsResults> GetFieldsAsync(string itemName)
         {
-            return await _client.GetFromJsonAsync<NutritionFactsResults>($"v1_1/search/{item_name}?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories");
+            var response = await _client.GetAsync($"v2/search/instant?query={itemName}");
+            var results = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<NutritionFactsResults>(await response.Content.ReadAsStringAsync());
+            // return await _client.GetFromJsonAsync<NutritionFactsResults>($"v1_1/search/{item_name}?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories");
         }
 
         public Task<UserNutrition> GetName()
