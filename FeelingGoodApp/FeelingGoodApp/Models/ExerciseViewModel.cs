@@ -7,7 +7,11 @@ namespace FeelingGoodApp.Models
 {
     public class ExerciseViewModel
     {
-        public ExerciseViewModel(int id, float duration, float pace, float calories, string description)
+        public ExerciseViewModel()
+        {
+        }
+
+        public ExerciseViewModel(int id, double duration, double pace, double calories, string description)
         {
             Id = id;
             Duration = duration;
@@ -16,10 +20,11 @@ namespace FeelingGoodApp.Models
             Description = description;
         }
 
+        
         public int Id { get; set; }
-        public float Duration { get; set; }
-        public float Pace { get; set; }
-        public float Calories { get; set; }
+        public double Duration { get; set; }
+        public double Pace { get; set; }
+        public double Calories { get; set; }
         public string Description { get; set; }
     }
 }

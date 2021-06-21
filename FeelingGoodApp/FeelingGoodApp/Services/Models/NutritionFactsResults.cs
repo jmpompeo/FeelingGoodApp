@@ -25,7 +25,7 @@ namespace FeelingGoodApp.Services.Models
         public string item_id { get; set; }
         public string item_name { get; set; }
         public string brand_name { get; set; }
-        public float nf_calories { get; set; }
+        public double nf_calories { get; set; }
         public int nf_serving_size_qty { get; set; }
         public string nf_serving_size_unit { get; set; }
     }

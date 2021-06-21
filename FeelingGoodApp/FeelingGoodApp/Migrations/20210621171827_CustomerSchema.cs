@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FeelingGoodApp.Migrations
 {
-    public partial class Identity : Migration
+    public partial class CustomerSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,13 +41,7 @@ namespace FeelingGoodApp.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    GoalWeight = table.Column<double>(nullable: false),
-                    Weight = table.Column<double>(nullable: false),
-                    ZipCode = table.Column<int>(nullable: false),
-                    Address = table.Column<string>(nullable: true),
-                    Age = table.Column<int>(nullable: false),
-                    Height = table.Column<float>(nullable: false)
+                    LastName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,31 +49,19 @@ namespace FeelingGoodApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExercisePhoto",
+                name: "ExerciseViewModel",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    highres = table.Column<string>(nullable: true),
-                    thumb = table.Column<string>(nullable: true)
+                    Duration = table.Column<double>(nullable: false),
+                    Pace = table.Column<double>(nullable: false),
+                    Calories = table.Column<double>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExercisePhoto", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MealData",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    item_name = table.Column<string>(nullable: true),
-                    nf_calories = table.Column<float>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MealData", x => x.Id);
+                    table.PrimaryKey("PK_ExerciseViewModel", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,34 +171,72 @@ namespace FeelingGoodApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Weight = table.Column<double>(nullable: false),
+                    GoalWeight = table.Column<double>(nullable: false),
+                    ZipCode = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Customers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Exercises",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    User_input = table.Column<string>(nullable: true),
-                    Duration_min = table.Column<float>(nullable: false),
-                    Met = table.Column<float>(nullable: false),
-                    Nf_calories = table.Column<float>(nullable: false),
-                    photoId = table.Column<int>(nullable: true),
-                    Compendium_Code = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Duration = table.Column<double>(nullable: false),
+                    Pace = table.Column<double>(nullable: false),
+                    Calories = table.Column<double>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    ExerciseInfoId = table.Column<int>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Exercises", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Exercises_Exercises_ExerciseInfoId",
-                        column: x => x.ExerciseInfoId,
-                        principalTable: "Exercises",
+                        name: "FK_Exercises_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MealData",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Item_name = table.Column<string>(nullable: false),
+                    Nf_calories = table.Column<double>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MealData", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Exercises_ExercisePhoto_photoId",
-                        column: x => x.photoId,
-                        principalTable: "ExercisePhoto",
+                        name: "FK_MealData_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -261,14 +281,19 @@ namespace FeelingGoodApp.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exercises_ExerciseInfoId",
-                table: "Exercises",
-                column: "ExerciseInfoId");
+                name: "IX_Customers_UserId",
+                table: "Customers",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exercises_photoId",
+                name: "IX_Exercises_UserId",
                 table: "Exercises",
-                column: "photoId");
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MealData_UserId",
+                table: "MealData",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -289,7 +314,13 @@ namespace FeelingGoodApp.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Customers");
+
+            migrationBuilder.DropTable(
                 name: "Exercises");
+
+            migrationBuilder.DropTable(
+                name: "ExerciseViewModel");
 
             migrationBuilder.DropTable(
                 name: "MealData");
@@ -299,9 +330,6 @@ namespace FeelingGoodApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "ExercisePhoto");
         }
     }
 }

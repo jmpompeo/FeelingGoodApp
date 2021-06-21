@@ -55,10 +55,6 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                Age = user.Age,
-                Height = user.Height,
-                Weight = user.Weight,
-                GoalWeight = user.GoalWeight
             };
         }
 

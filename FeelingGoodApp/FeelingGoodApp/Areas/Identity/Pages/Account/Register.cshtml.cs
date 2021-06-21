@@ -60,26 +60,6 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
-            [Display(Name = "Zip Code")]
-            public int ZipCode { get; set; }
-
-            [Required]
-            public int Age { get; set; }
-
-            [Required]
-            public double Weight { get; set; }
-
-            [Required]
-            [Display(Name = "Goal Weight")]
-            public double GoalWeight { get; set; }
-
-            [Required]
-            public string Address { get; set; }
-
-            [Required]
-            public float Height { get; set; }
-
-            [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -109,14 +89,12 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
                   Email = Input.Email,     
                   FirstName = Input.FirstName,
                   LastName = Input.LastName,
-                  Address = Input.Address,
-                  Age = Input.Age,
-                  Weight = Input.Weight,
-                  GoalWeight = Input.GoalWeight,
-                  Height = Input.Height,
-                  ZipCode = Input.ZipCode
                 };
+            
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -146,6 +124,8 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+
+
             }
 
             // If we got this far, something failed, redisplay form

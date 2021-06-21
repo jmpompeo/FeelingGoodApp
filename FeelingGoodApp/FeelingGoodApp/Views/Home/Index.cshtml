@@ -1,56 +1,48 @@
-@model FeelingGoodApp.Models.IndexViewModel
+﻿@model FeelingGoodApp.Models.CustomerViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<style>
-    .button {
-        border-top: 1px solid #5dd465;
-        background: #13344a;
-        background: -webkit-gradient(linear, left top, left bottom, from(#76abcf), to(#13344a));
-        background: -webkit-linear-gradient(top, #76abcf, #13344a);
-        background: -moz-linear-gradient(top, #76abcf, #13344a);
-        /*    background: -ms-linear-gradient(top, #76abcf, #13344a);*/
-        background: -o-linear-gradient(top, #76abcf, #13344a);
-        padding: 8.5px 17px;
-        -webkit-border-radius: 22px;
-        -moz-border-radius: 22px;
-        border-radius: 22px;
-        -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-        -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-        box-shadow: rgba(0,0,0,1) 0 1px 0;
-        text-shadow: rgba(0,0,0,.4) 0 1px 0;
-        color: #ededed;
-        font-size: 18px;
-        font-family: Georgia, serif;
-        text-decoration: none;
-        vertical-align: middle;
-    }
-        .button:hover {
-            border-top-color: #90ab91;
-            background: #90ab91;
-            color: #091821;
-        }
-        .button:active {
-            border-top-color: #1b435e;
-            background: #1b435e;
-        }
-</style>
+<!DOCTYPE html>
 
-    <a class="button"  asp-area="Identity" asp-page="/Account/Register">Register To Feel Good</a><br /><br />
-    <a class="button" asp-area="Identity" asp-page="/Account/Login">Login To Feel Great</a>
-@*<h1>Index</h1>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
 
-<h4>Welcome To Feeling Good</h4>
+<h4>Hello @User.Identity.Name please type in your weight, and the weight you would like to be at.
+    </h4>
 <hr />
-
-@*<input type="button" color="red" name="button" class="button1" value="Submit" />
-
-
-<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="GetCustomerData">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" class="form-control" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GoalWeight" class="control-label"></label>
+                <input asp-for="GoalWeight" class="form-control" />
+                <span asp-validation-for="GoalWeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
 
 <div>
     <a asp-action="Index">Back to List</a>
-</div>*@
+</div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>
