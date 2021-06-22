@@ -1,4 +1,5 @@
 ﻿using FeelingGoodApp.Data;
+using FeelingGoodApp.Data.Models;
 using FeelingGoodApp.Models;
 using FeelingGoodApp.Services;
 using FeelingGoodApp.Services.Models;
@@ -19,7 +20,7 @@ namespace FeelingGoodApp.Controllers
         private readonly UserManager<ApplicationUser> _usermanager;
 
 
-        public ExerciseController(IExerciseService service,FeelingGoodContext context, UserManager<ApplicationUser> usermanager)
+        public ExerciseController(IExerciseService service, FeelingGoodContext context, UserManager<ApplicationUser> usermanager)
         {
             _service = service;
             _context = context;
@@ -28,8 +29,32 @@ namespace FeelingGoodApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var userId =  _usermanager.GetUserId(User);
+            var userId = _usermanager.GetUserId(User);
             return View(await _context.Exercises.Where(x => x.User.Id == userId).ToListAsync());
+        }
+
+        //added details
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var exercise = await _context.Exercises
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+
+            return View(exercise);
+        }
+
+        //added GET create
+        public IActionResult Create()
+        {
+            return View();
         }
 
         public IActionResult GetExercise()
@@ -37,13 +62,108 @@ namespace FeelingGoodApp.Controllers
             return View();
         }
 
-        //[HttpPost]
+        [HttpPost]
+        //added Post Create and Bind to protect against overposting attacks
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Name,User")] ExerciseInfo exercise)
+        {
+            if (ModelState.IsValid)
+            {
+                exercise.User = await _usermanager.GetUserAsync(User);
+                _context.Add(exercise);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(exercise);
+        }
         public async Task<IActionResult> ShowExercise(UserProfileViewModel profile)
         {
 
             var activity = await _service.GetExercise(profile);
 
             return View(activity);
+        }
+        // Get Exercise Edit
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var exercise = await _context.Exercises.FindAsync(id);
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+            return View(exercise);
+        }
+        // Added POST Exercise Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,User")] ExerciseInfo exercise)
+        {
+            if (id != exercise.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(exercise);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!exerciseExists(exercise.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(exercise);
+        }
+        //Added Get Delete
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var toDo = await _context.Exercises
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (toDo == null)
+            {
+                return NotFound();
+            }
+
+            return View(toDo);
+        }
+        //Added Post Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var Exercises = await _context.Exercises.FindAsync(id);
+            _context.Exercises.Remove(Exercises);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+        private bool exerciseExists(int id)
+        {
+            return _context.Exercises.Any(e => e.Id == id);
         }
     }
 }
