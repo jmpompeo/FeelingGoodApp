@@ -1,4 +1,3 @@
-using FeelingGoodApp.Data;
 using FeelingGoodApp.Services.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,12 +21,12 @@ namespace FeelingGoodApp
                 })
                 .Build();
 
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<FeelingGoodContext>();
-                context.Database.Migrate();
-            }
+            //using (var scope = host.Services.CreateScope())
+            //{
+            //    var services = scope.ServiceProvider;
+            //    var context = services.GetRequiredService<FeelingGoodContext>();
+            //    context.Database.Migrate();
+            //}
 
             host.Run();
         }
