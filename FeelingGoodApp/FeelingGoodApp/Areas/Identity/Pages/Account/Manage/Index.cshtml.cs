@@ -36,47 +36,30 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-            [Required]
+
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
-            [Required]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "Password")]
-            public string Password { get; set; }
-
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
-
-            [Required]
             public double Weight { get; set; }
 
             [Display(Name = "Goal Weight")]
-            [Required]
             public double GoalWeight { get; set; }
 
+            [Display(Name = "Height in centimeters")]
             public double Height { get; set; }
 
             [Display(Name = "Zip Code")]
-            [Required]
             public int ZipCode { get; set; }
 
-            [Required]
             public int Age { get; set; }
 
-            [Required]
             public string Address { get; set; }
         }
 
@@ -89,17 +72,17 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber,
-                Email = Input.Email,
-                FirstName = Input.FirstName,
-                LastName = Input.LastName,
-                Password = Input.Password,
-                ConfirmPassword = Input.ConfirmPassword,
-                Weight = Input.Weight,
-                GoalWeight = Input.GoalWeight,
-                ZipCode = Input.ZipCode,
-                Age = Input.Age,
-                Address = Input.Address
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address = user.Address,
+                Age = user.Age,
+                Email = user.Email,
+                GoalWeight = user.GoalWeight,
+                Height = user.Height,
+                Weight = user.Weight,
+                ZipCode = user.ZipCode,
+                PhoneNumber = phoneNumber
+                
             };
         }
 
@@ -139,6 +122,43 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+            if (Input.Address != user.Address)
+            {
+                user.Address = Input.Address;
+            }
+            if (Input.Age != user.Age)
+            {
+                user.Age = Input.Age;
+            }
+            if (Input.Email != user.Email)
+            {
+                user.Email = Input.Email;
+            }
+            if (Input.FirstName != user.FirstName)
+            {
+                user.FirstName = Input.FirstName;
+            }
+            if (Input.GoalWeight != user.GoalWeight)
+            {
+                user.GoalWeight = Input.GoalWeight;
+            }
+            if (Input.Height != user.Height)
+            {
+                user.Height = Input.Height;
+            }
+            if (Input.LastName != user.LastName)
+            {
+                user.LastName = Input.LastName;
+            }
+            if (Input.Weight != user.Weight)
+            {
+                user.Weight = Input.Weight;
+            }
+            if (Input.ZipCode != user.ZipCode)
+            {
+                user.ZipCode = Input.ZipCode;
+            }
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
