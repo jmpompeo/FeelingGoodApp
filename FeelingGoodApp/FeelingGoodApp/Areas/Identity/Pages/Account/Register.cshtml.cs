@@ -75,8 +75,10 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
 
             [Display(Name = "Goal Weight")]
             [Required]
-
             public double GoalWeight { get; set; }
+
+            [Display(Name = "Height in centimeters")]
+            public double Height { get; set; }
 
             [Display(Name = "Zip Code")]
             [Required]
@@ -97,7 +99,7 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -111,11 +113,10 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
                   GoalWeight = Input.GoalWeight,
                   Address = Input.Address,
                   Age = Input.Age,
-                  ZipCode = Input.ZipCode
+                  ZipCode = Input.ZipCode,
+                  Height = Input.Height
                 };
             
-
-
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

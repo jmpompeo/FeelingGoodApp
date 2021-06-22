@@ -42,5 +42,7 @@ namespace FeelingGoodApp.Controllers
             ViewData["type"] = type;
             return View(places);
         }
+
+
     }
 }

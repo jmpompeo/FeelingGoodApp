@@ -51,6 +51,9 @@ namespace FeelingGoodApp.Migrations
                     b.Property<double>("GoalWeight")
                         .HasColumnType("float");
 
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FeelingGoodApp.Migrations
 {
     [DbContext(typeof(FeelingGoodContext))]
-    [Migration("20210622031124_CustomerSchema")]
+    [Migration("20210622195835_CustomerSchema")]
     partial class CustomerSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,9 @@ namespace FeelingGoodApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("GoalWeight")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Height")
                         .HasColumnType("float");
 
                     b.Property<string>("LastName")
