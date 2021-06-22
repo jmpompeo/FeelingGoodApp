@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using FeelingGoodApp.Models;
 using FeelingGoodApp.Data;
+using FeelingGoodApp.Services.Models;
 
 namespace FeelingGoodApp.Services.Models
 {
@@ -13,18 +14,15 @@ namespace FeelingGoodApp.Services.Models
         {
         }
 
-        public DbSet<ApplicationUser> EndUser { get; set; }
+        public DbSet<Nutrition> MealData { get; set; }
+        
+        public DbSet<Exercise> Exercises { get; set; }
+        
+        public DbSet<Customer> Customers { get; set; }
+        
+        public DbSet<FeelingGoodApp.Services.Models.ExerciseInfo> ExerciseInfo { get; set; }
+        
+        public DbSet<FeelingGoodApp.Models.ExerciseViewModel> ExerciseViewModel { get; set; }
 
-        public DbSet<NutritionViewModel> MealData { get; set; }
-        
-        public DbSet<ExerciseInfo> ExerciseInfo { get; set; }
-        
-        //public DbSet<FeelingGoodApp.Models.UserProfileViewModel> UserProfileViewModel { get; set; }
-        //public DbSet<ExerciseRequest> EndUser { get; set; }
-        //public DbSet<Exercises> Exercises { get; set; }
-        //public DbSet<LocationViewModel> LocationViewModel { get; set; }
-        //public DbSet<Location> Location { get; set; }
-        //public DbSet<IndexViewModel> IndexViewModel { get; set; }
-        //public DbSet<ExerciseResponse> ExerciseResponse { get; set; }
     }
 }

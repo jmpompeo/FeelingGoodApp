@@ -1,9 +1,12 @@
-﻿using FeelingGoodApp.Models;
+﻿using FeelingGoodApp.Data;
+using FeelingGoodApp.Data.Models;
+using FeelingGoodApp.Models;
 using FeelingGoodApp.Services;
+using FeelingGoodApp.Services.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,21 +15,66 @@ namespace FeelingGoodApp.Controllers
     public class NutritionController : Controller
     {
         private readonly INutritionService _service;
+        private readonly UserManager<ApplicationUser> _usermanager;
+        private readonly FeelingGoodContext _context;
         // GET: NutritionController
-        public async Task<ActionResult> Search(string item_Name)
+
+        public NutritionController(INutritionService service, UserManager<ApplicationUser> usermanager, FeelingGoodContext context)
         {
-            var information = await _service.GetFieldsAsync(item_Name);
-            NutritionViewModel FoodChoice = new NutritionViewModel(information.hits.FirstOrDefault().fields.item_name, information.hits.FirstOrDefault().fields.nf_calories, information.hits.FirstOrDefault().fields.nf_serving_size_qty);
-            //var response = information.hits.FirstOrDefault().fields.nf_calories;
-            return View(FoodChoice); // need to add the ability to edit the quantity
+            _service = service;
+            _usermanager = usermanager;
+            _context = context;
         }
-        public IActionResult GetNutrition()
+
+        [HttpPost]
+        public async Task<IActionResult> GetNutrition(NutritionViewModel model)
+        {
+            var information = await _service.GetFieldsAsync(model.item_name);
+            Nutrition FoodChoice = new Nutrition();
+            var nutritionModel = new NutritionViewModel();
+            var user = await _usermanager.GetUserAsync(User);
+            if (ModelState.IsValid)
+            {
+                FoodChoice.Item_name = information.hits.FirstOrDefault().fields.item_name;
+                FoodChoice.Nf_calories = information.hits.FirstOrDefault().fields.nf_calories;
+                FoodChoice.Quantity = information.hits.FirstOrDefault().fields.nf_serving_size_qty;
+                FoodChoice.User = user;
+
+                nutritionModel.item_name = FoodChoice.Item_name;
+                nutritionModel.nf_calories = FoodChoice.Nf_calories;
+                nutritionModel.Quantity = FoodChoice.Quantity;
+
+            }
+            _context.MealData.Add(FoodChoice);
+            await _context.SaveChangesAsync();
+            return View(nutritionModel); // need to add the ability to edit the quantity
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var userId = _usermanager.GetUserId(User);
+            return View(await _context.MealData.Where(x => x.User.Id == userId).ToListAsync());
+        }
+
+        public IActionResult AddFood()
         {
 
             return View();
         }
 
-        //[HttpPost]
+        public async Task<IActionResult> AddToMeals(NutritionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _usermanager.GetUserAsync(User);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+            }
+
+            return View(model);
+        }
+
 
 
         // GET: NutritionController/Details/5
@@ -48,7 +96,7 @@ namespace FeelingGoodApp.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Search));
+                return RedirectToAction(nameof(GetNutrition));
             }
             catch
             {
@@ -69,7 +117,7 @@ namespace FeelingGoodApp.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Search));
+                return RedirectToAction(nameof(GetNutrition));
             }
             catch
             {
@@ -90,7 +138,7 @@ namespace FeelingGoodApp.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Search));
+                return RedirectToAction(nameof(GetNutrition));
             }
             catch
             {

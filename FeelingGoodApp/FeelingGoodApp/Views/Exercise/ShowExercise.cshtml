@@ -1,76 +1,51 @@
-﻿@model FeelingGoodApp.Services.Models.ExerciseInfo
+﻿@model FeelingGoodApp.Models.ExerciseViewModel
 
 @{
-    ViewData["Title"] = "ShowExercise";
+    Layout = null;
 }
 
-<h1>ShowExercise</h1>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowExercise</title>
+</head>
+<body>
 
 <div>
-    <h4>ExerciseInfo</h4>
+    <h4>ExerciseViewModel</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User_input)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Duration)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User_input)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Duration)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Duration_min)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pace)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Duration_min)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pace)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Met)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Calories)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Met)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Calories)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nf_calories)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nf_calories)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Compendium_Code)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Compendium_Code)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.photo)
-        </dt>
-        @if (Model.photo.highres != null)
-        {
-            <dd class="col-sm-10">
-                <img src="@Model.photo.highres" />
-            </dd>
-        }
-        else
-        {
-            <dd class="col-sm-10">
-                <img src="@Model.photo.thumb" />
-            </dd>
-        }
     </dl>
-    
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+</body>
+</html>

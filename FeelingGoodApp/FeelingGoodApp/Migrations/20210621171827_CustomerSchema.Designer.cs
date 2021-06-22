@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace FeelingGoodApp.Data.Migrations
+namespace FeelingGoodApp.Migrations
 {
     [DbContext(typeof(FeelingGoodContext))]
-    [Migration("20210615012552_AppUserUpdate")]
-    partial class AppUserUpdate
+    [Migration("20210621171827_CustomerSchema")]
+    partial class CustomerSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,12 +29,6 @@ namespace FeelingGoodApp.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -48,12 +42,6 @@ namespace FeelingGoodApp.Data.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("GoalWeight")
-                        .HasColumnType("float");
-
-                    b.Property<float>("Height")
-                        .HasColumnType("real");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -91,9 +79,6 @@ namespace FeelingGoodApp.Data.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<int>("ZipCode")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -107,166 +92,125 @@ namespace FeelingGoodApp.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("FeelingGoodApp.Data.Models.Exercises", b =>
+            modelBuilder.Entity("FeelingGoodApp.Data.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Exercise")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Exercises");
-                });
-
-            modelBuilder.Entity("FeelingGoodApp.Models.IndexViewModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("Gender")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Height_cm")
-                        .HasColumnType("real");
+                    b.Property<double>("GoalWeight")
+                        .HasColumnType("float");
 
-                    b.Property<string>("Query")
+                    b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Radius")
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ZipCode")
                         .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Weight_kg")
-                        .HasColumnType("real");
-
-                    b.Property<string>("item_name")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("IndexViewModel");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("FeelingGoodApp.Models.LocationViewModel", b =>
+            modelBuilder.Entity("FeelingGoodApp.Data.Models.Exercise", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FormattedAddress")
+                    b.Property<double>("Calories")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Duration")
+                        .HasColumnType("float");
 
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
+                    b.Property<double>("Pace")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("LocationViewModel");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Exercises");
                 });
 
-            modelBuilder.Entity("FeelingGoodApp.Models.NutritionViewModel", b =>
+            modelBuilder.Entity("FeelingGoodApp.Data.Models.Nutrition", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Item_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Nf_calories")
+                        .HasColumnType("float");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("item_name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("nf_calories")
-                        .HasColumnType("real");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("MealData");
                 });
 
-            modelBuilder.Entity("FeelingGoodApp.Services.Models.ExerciseInfo", b =>
+            modelBuilder.Entity("FeelingGoodApp.Models.ExerciseViewModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ExerciseInfoId")
-                        .HasColumnType("int");
+                    b.Property<double>("Calories")
+                        .HasColumnType("float");
 
-                    b.Property<int?>("ExerciseResponseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("description")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("duration_min")
-                        .HasColumnType("int");
+                    b.Property<double>("Duration")
+                        .HasColumnType("float");
 
-                    b.Property<int>("met")
-                        .HasColumnType("int");
-
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("nf_calories")
-                        .HasColumnType("int");
-
-                    b.Property<string>("user_input")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Pace")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExerciseInfoId");
-
-                    b.HasIndex("ExerciseResponseId");
-
-                    b.ToTable("ExerciseInfo");
-                });
-
-            modelBuilder.Entity("FeelingGoodApp.Services.Models.ExerciseResponse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExerciseResponse");
-                });
-
-            modelBuilder.Entity("FeelingGoodApp.Services.Models.Location", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<float>("Latitude")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Longitude")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Location");
+                    b.ToTable("ExerciseViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -404,15 +348,25 @@ namespace FeelingGoodApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("FeelingGoodApp.Services.Models.ExerciseInfo", b =>
+            modelBuilder.Entity("FeelingGoodApp.Data.Models.Customer", b =>
                 {
-                    b.HasOne("FeelingGoodApp.Services.Models.ExerciseInfo", null)
-                        .WithMany("exercises")
-                        .HasForeignKey("ExerciseInfoId");
+                    b.HasOne("FeelingGoodApp.Data.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
 
-                    b.HasOne("FeelingGoodApp.Services.Models.ExerciseResponse", null)
-                        .WithMany("Exercises")
-                        .HasForeignKey("ExerciseResponseId");
+            modelBuilder.Entity("FeelingGoodApp.Data.Models.Exercise", b =>
+                {
+                    b.HasOne("FeelingGoodApp.Data.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("FeelingGoodApp.Data.Models.Nutrition", b =>
+                {
+                    b.HasOne("FeelingGoodApp.Data.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
