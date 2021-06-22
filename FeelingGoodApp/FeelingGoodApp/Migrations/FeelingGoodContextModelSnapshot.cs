@@ -27,6 +27,13 @@ namespace FeelingGoodApp.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -40,6 +47,9 @@ namespace FeelingGoodApp.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("GoalWeight")
+                        .HasColumnType("float");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -77,6 +87,12 @@ namespace FeelingGoodApp.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -97,32 +113,23 @@ namespace FeelingGoodApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("GoalWeight")
-                        .HasColumnType("float");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
-
-                    b.Property<int>("ZipCode")
+                    b.Property<int>("age")
                         .HasColumnType("int");
+
+                    b.Property<string>("gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("height_cm")
+                        .HasColumnType("real");
+
+                    b.Property<string>("query")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("weight_kg")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -133,7 +140,7 @@ namespace FeelingGoodApp.Migrations
 
             modelBuilder.Entity("FeelingGoodApp.Data.Models.Exercise", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);

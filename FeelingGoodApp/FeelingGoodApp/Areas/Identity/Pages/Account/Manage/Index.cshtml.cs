@@ -36,13 +36,49 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
 
-            public int Age { get; set; }
-            public double Height { get; set; }
+            [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
+            [Required]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [DataType(DataType.Password)]
+            [Display(Name = "Password")]
+            public string Password { get; set; }
+
+            [DataType(DataType.Password)]
+            [Display(Name = "Confirm password")]
+            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            public string ConfirmPassword { get; set; }
+
+            [Required]
             public double Weight { get; set; }
 
             [Display(Name = "Goal Weight")]
+            [Required]
+
             public double GoalWeight { get; set; }
+
+            public double Height { get; set; }
+
+            [Display(Name = "Zip Code")]
+            [Required]
+            public int ZipCode { get; set; }
+
+            [Required]
+            public int Age { get; set; }
+
+            [Required]
+            public string Address { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -55,6 +91,16 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
+                Email = Input.Email,
+                FirstName = Input.FirstName,
+                LastName = Input.LastName,
+                Password = Input.Password,
+                ConfirmPassword = Input.ConfirmPassword,
+                Weight = Input.Weight,
+                GoalWeight = Input.GoalWeight,
+                ZipCode = Input.ZipCode,
+                Age = Input.Age,
+                Address = Input.Address
             };
         }
 

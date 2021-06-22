@@ -27,10 +27,17 @@ namespace FeelingGoodApp.Controllers
             _usermanager = usermanager;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
+            var exercise = await _context.Exercises.FindAsync(id);
+            var exr = new UserProfileViewModel
+            {
+                Id = exercise.Id.Value
+            };
             var userId = _usermanager.GetUserId(User);
-            return View(await _context.Exercises.Where(x => x.User.Id == userId).ToListAsync());
+            await _context.Exercises.Where(x => x.User.Id == userId).ToListAsync();
+
+            return View(exr);
         }
 
         public IActionResult GetExercise()
@@ -57,10 +64,10 @@ namespace FeelingGoodApp.Controllers
                 exercise.Duration = exr.Duration;
                 exercise.Description = exr.Description;
 
-
             }
             _context.Exercises.Add(exr);
             await _context.SaveChangesAsync();
+            exercise.Id = exr.Id.Value;
             return View(exercise); // need to add the ability to edit the quantity
         }
 
@@ -105,16 +112,20 @@ namespace FeelingGoodApp.Controllers
                 return NotFound();
             }
             var exercise = await _context.Exercises.FindAsync(id);
+            var exr = new UserProfileViewModel
+            {
+                Id = exercise.Id.Value
+            };
             if (exercise == null)
             {
                 return NotFound();
             }
-            return View(exercise);
+            return View(exr);
         }
         // Added POST Exercise Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,User")] ExerciseViewModel exercise)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,User")] UserProfileViewModel exercise)
         {
             if (id != exercise.Id)
             {
@@ -149,13 +160,24 @@ namespace FeelingGoodApp.Controllers
             {
                 return NotFound();
             }
-            var toDo = await _context.Exercises
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (toDo == null)
+
+            var exercise = await _context.Exercises.FindAsync(id);
+            var exr = new UserProfileViewModel
+            {
+                Id = exercise.Id.Value
+            };
+
+            var model = new ExerciseViewModel
+            { 
+                Id = exercise.Id.Value
+            };
+            //var toDo = await _context.Exercises
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            if (model == null)
             {
                 return NotFound();
             }
-            return View(toDo);
+            return View(model);
         }
         //Added Post Delete
         [HttpPost, ActionName("Delete")]

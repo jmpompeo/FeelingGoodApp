@@ -69,6 +69,24 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            public double Weight { get; set; }
+
+            [Display(Name = "Goal Weight")]
+            [Required]
+
+            public double GoalWeight { get; set; }
+
+            [Display(Name = "Zip Code")]
+            [Required]
+            public int ZipCode { get; set; }
+
+            [Required]
+            public int Age { get; set; }
+
+            [Required]
+            public string Address { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -89,6 +107,11 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
                   Email = Input.Email,     
                   FirstName = Input.FirstName,
                   LastName = Input.LastName,
+                  Weight = Input.Weight,
+                  GoalWeight = Input.GoalWeight,
+                  Address = Input.Address,
+                  Age = Input.Age,
+                  ZipCode = Input.ZipCode
                 };
             
 

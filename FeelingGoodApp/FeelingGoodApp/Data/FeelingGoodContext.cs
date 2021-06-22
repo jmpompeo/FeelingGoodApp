@@ -20,9 +20,8 @@ namespace FeelingGoodApp.Services.Models
         
         public DbSet<Customer> Customers { get; set; }
         
-        public DbSet<FeelingGoodApp.Services.Models.ExerciseInfo> ExerciseInfo { get; set; }
-        
         public DbSet<FeelingGoodApp.Models.ExerciseViewModel> ExerciseViewModel { get; set; }
+        
 
     }
 }
