@@ -52,11 +52,22 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
+            [Required]
             [Display(Name = "Zip Code")]
             public int ZipCode { get; set; }
 
             [Required]
             public int Age { get; set; }
+
+            [Required]
+            public double Weight { get; set; }
 
             [Required]
             [Display(Name = "Goal Weight")]
@@ -93,10 +104,14 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
-                { UserName = Input.Email, 
-                  Email = Input.Email, 
+                { 
+                  UserName = Input.Email, 
+                  Email = Input.Email,     
+                  FirstName = Input.FirstName,
+                  LastName = Input.LastName,
                   Address = Input.Address,
                   Age = Input.Age,
+                  Weight = Input.Weight,
                   GoalWeight = Input.GoalWeight,
                   Height = Input.Height,
                   ZipCode = Input.ZipCode

@@ -3,7 +3,6 @@ using FeelingGoodApp.Services;
 using FeelingGoodApp.Services.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +15,7 @@ namespace FeelingGoodApp
     {
         private string _googleApiKey = null;
         private string _nutritionApiKey = null;
+        private string _nutritionAppId = null;
         private string _nutritionApiKey2 = null;
         public Startup(IConfiguration configuration)
         {
@@ -28,8 +28,9 @@ namespace FeelingGoodApp
         public void ConfigureServices(IServiceCollection services)
         {
             _googleApiKey = Configuration["GoogleApiKey"];
-            _nutritionApiKey = Configuration["NutritionAppId"];
-            _nutritionApiKey2 = Configuration["NutritionAppKey"];
+            _nutritionApiKey = Configuration["NutritionAPIKey"];
+            _nutritionApiKey2 = Configuration["NutritionAPIKey2"];
+            _nutritionAppId = Configuration["NutritionAppId"]; 
 
             services.AddDbContext<FeelingGoodContext>(options =>
                 options.UseSqlServer(
@@ -43,12 +44,15 @@ namespace FeelingGoodApp
             services.AddHttpClient<INutritionService, NutritionService>(client =>
             {
 
-                client.BaseAddress = new Uri("https://trackapi.nutritionix.com/");
-                client.DefaultRequestHeaders.Add("x-app-id", Configuration["NutritionAppId"]);
-                client.DefaultRequestHeaders.Add("x-app-key", Configuration["NutritionAppKey"]);
+                client.BaseAddress = new Uri("https://nutritionix-api.p.rapidapi.com/");
+                client.DefaultRequestHeaders.Add("x-rapidapi-key", _nutritionApiKey2);
+            });
 
-                //client.BaseAddress = new Uri("https://nutritionix-api.p.rapidapi.com/");
-                //client.DefaultRequestHeaders.Add("X-Rapidapi-Key", _nutritionApiKey);
+            services.AddHttpClient<IExerciseService, ExerciseService>(client =>
+            {
+                client.BaseAddress = new Uri("https://trackapi.nutritionix.com/");
+                client.DefaultRequestHeaders.Add("x-app-id", _nutritionAppId);
+                client.DefaultRequestHeaders.Add("x-app-key", _nutritionApiKey);
             });
 
             //services.AddHttpClient<INutritionService, NutritionService>(client =>

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,17 +15,15 @@ namespace FeelingGoodApp.Controllers
     public class HomeController : Controller
     {
 
-        private readonly INutritionService _service;
+        //private readonly INutritionService _service;
         private readonly IConfiguration _configuration;
-
-        //public HomeController(ILogger<HomeController> logger, INutritionService service, IConfiguration configuration)
         private readonly ILocationService _locationService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly FeelingGoodContext _context;
 
-        public HomeController(INutritionService service, ILocationService locationService, IConfiguration configuration, UserManager<ApplicationUser> userManager, FeelingGoodContext context)
-        {          
-            _service = service;
+        public HomeController(/*INutritionService service*/ ILocationService locationService, IConfiguration configuration, UserManager<ApplicationUser> userManager, FeelingGoodContext context)
+        {
+            //_service = service;
             _configuration = configuration;
             _locationService = locationService;
             _userManager = userManager;
@@ -38,6 +35,10 @@ namespace FeelingGoodApp.Controllers
             return View(new IndexViewModel());
         }
 
+        //public async Task<IActionResult> GetGoals()
+        //{
+
+        //}
         public IActionResult AboutUs()
         {
             return View();
@@ -102,6 +103,7 @@ namespace FeelingGoodApp.Controllers
             }
             return View(model);
         }
+
        // [HttpPost]
        //public async Task<IActionResult> EditExercise(UserProfileViewModel profile)
        // {

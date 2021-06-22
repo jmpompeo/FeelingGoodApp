@@ -1,0 +1,54 @@
+﻿@model FeelingGoodApp.Models.UserProfileViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Identity/Pages/Account/Manage/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<h4>UserProfileViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="query" class="control-label"></label>
+                <input asp-for="query" class="form-control" />
+                <span asp-validation-for="query" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="gender" class="control-label"></label>
+                <input asp-for="gender" class="form-control" />
+                <span asp-validation-for="gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="weight_kg" class="control-label"></label>
+                <input asp-for="weight_kg" class="form-control" />
+                <span asp-validation-for="weight_kg" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="height_cm" class="control-label"></label>
+                <input asp-for="height_cm" class="form-control" />
+                <span asp-validation-for="height_cm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="age" class="control-label"></label>
+                <input asp-for="age" class="form-control" />
+                <span asp-validation-for="age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
