@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FeelingGoodApp.Data;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace FeelingGoodApp.Services.Models
@@ -9,5 +10,6 @@ namespace FeelingGoodApp.Services.Models
 
         [JsonPropertyName("exercises")]
         public IList<ExerciseInfo> Exercises { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

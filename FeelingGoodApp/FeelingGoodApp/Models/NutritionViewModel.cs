@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FeelingGoodApp.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,7 +11,7 @@ namespace FeelingGoodApp.Models
 {
     public class NutritionViewModel
     {
-        public NutritionViewModel(string name, float calories, int quantity)
+        public NutritionViewModel(string name, double calories, int quantity)
         {
             item_name = name;
             nf_calories = calories;
@@ -21,10 +22,10 @@ namespace FeelingGoodApp.Models
 
         }
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int Id { get; set; }
         public string item_name { get; set; }
-        public float nf_calories { get; set; }
+        public double nf_calories { get; set; }
         public int Quantity { get; set; }
     }
 }
