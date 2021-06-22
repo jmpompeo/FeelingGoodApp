@@ -4,13 +4,14 @@ namespace FeelingGoodApp.Data.Models
 {
     public class Customer
     {
+        [Key]
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public double GoalWeight { get; set; }
 
-        [Display(Name = "Zip Code")]
-        public int ZipCode { get; set; }
-        public string Address { get; set; }
+        public string query { get; set; }
+        public string gender { get; set; }
+        public float weight_kg { get; set; }
+        public float height_cm { get; set; }
+        public int age { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

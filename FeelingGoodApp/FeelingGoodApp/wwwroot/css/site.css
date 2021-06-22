@@ -35,6 +35,8 @@ html {
   }
 }
 
+
+
 .button1{
     color: red;
     border: 2px solid;
@@ -68,19 +70,7 @@ html {
 
  /*body {*/
     /* Margin bottom by footer height */
-    /*margin-bottom: 60px;
-    background-color: darkcyan;
-    background-image: url(images/bradley-dunn-KxYG-7dOXpc-unsplash.jpg);
-    background-position: center;
-    position: relative;
-    background-repeat: no-repeat;*/
-    /*background-position: center;
-    background-size: auto;
-    background-repeat: no-repeat;
-    width: 100%;*/
-/*}*/
-.homepageindex{
-    width:100;
+    margin-bottom: 60px;
 }
 img{
     width:100%;

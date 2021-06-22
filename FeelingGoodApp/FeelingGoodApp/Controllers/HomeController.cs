@@ -1,4 +1,5 @@
 ﻿using FeelingGoodApp.Data;
+using FeelingGoodApp.Data.Models;
 using FeelingGoodApp.Models;
 using FeelingGoodApp.Services;
 using FeelingGoodApp.Services.Models;
@@ -32,23 +33,23 @@ namespace FeelingGoodApp.Controllers
 
         public IActionResult Index()
         {
-            return View(new IndexViewModel());
-        }
-
-        //public async Task<IActionResult> GetGoals()
-        //{
-
-        //}
-        public IActionResult AboutUs()
-        {
             return View();
         }
 
-        //public async Task<IActionResult> ShowMeal()
-        //{
-        //    var response = await _service.GetName();
-        //    return View(response.Breakfast);
-        //}
+        [HttpPost]
+        public async Task<IActionResult> GetCustomerData(CustomerViewModel model)
+        {
+            Customer customer = new Customer();
+            var user = await _userManager.GetUserAsync(User);
+            if (ModelState.IsValid)
+            {
+                customer.User = user;
+            }
+            await _context.Users.AnyAsync();
+            await _context.SaveChangesAsync();
+            return View(model); // need to add the ability to edit the quantity
+        }
+
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -59,17 +60,6 @@ namespace FeelingGoodApp.Controllers
 
             var food = await _context.MealData.FindAsync(id);
             return View(food);
-        }
-
-        public async Task<IActionResult> AddToMeals(NutritionViewModel Meal)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(Meal);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(Meal);
         }
 
         [HttpPost]
@@ -104,12 +94,12 @@ namespace FeelingGoodApp.Controllers
             return View(model);
         }
 
-       // [HttpPost]
-       //public async Task<IActionResult> EditExercise(UserProfileViewModel profile)
-       // {
+        // [HttpPost]
+        //public async Task<IActionResult> EditExercise(UserProfileViewModel profile)
+        // {
 
-       //     var edit = await _service.
-       // }
+        //     var edit = await _service.
+        // }
 
         public IActionResult Privacy()
         {
