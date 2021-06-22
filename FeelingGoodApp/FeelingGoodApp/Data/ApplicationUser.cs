@@ -15,9 +15,11 @@ namespace FeelingGoodApp.Data
         [Required]
         public double Weight { get; set; }
 
+        [Display(Name = "Height in Centimeters")]
+        public double Height { get; set; }
+        
         [Display(Name = "Goal Weight")]
         [Required]
-
         public double GoalWeight { get; set; }
 
         [Display(Name = "Zip Code")]

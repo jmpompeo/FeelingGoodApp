@@ -43,6 +43,7 @@ namespace FeelingGoodApp.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Weight = table.Column<double>(nullable: false),
+                    Height = table.Column<double>(nullable: false),
                     GoalWeight = table.Column<double>(nullable: false),
                     ZipCode = table.Column<int>(nullable: false),
                     Age = table.Column<int>(nullable: false),
