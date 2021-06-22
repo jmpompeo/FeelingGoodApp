@@ -36,8 +36,6 @@ namespace FeelingGoodApp.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         public async Task<IActionResult> GetCustomerData(CustomerViewModel model)
         {
