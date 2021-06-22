@@ -27,17 +27,10 @@ namespace FeelingGoodApp.Controllers
             _usermanager = usermanager;
         }
 
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index()
         {
-            var exercise = await _context.Exercises.FindAsync(id);
-            var exr = new UserProfileViewModel
-            {
-                Id = exercise.Id.Value
-            };
             var userId = _usermanager.GetUserId(User);
-            await _context.Exercises.Where(x => x.User.Id == userId).ToListAsync();
-
-            return View(exr);
+            return View(await _context.Exercises.Where(x => x.User.Id == userId).ToListAsync());
         }
 
         public IActionResult GetExercise()

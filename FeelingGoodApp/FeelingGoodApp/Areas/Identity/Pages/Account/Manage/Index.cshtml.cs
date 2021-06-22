@@ -65,7 +65,6 @@ namespace FeelingGoodApp.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Goal Weight")]
             [Required]
-
             public double GoalWeight { get; set; }
 
             public double Height { get; set; }

@@ -1,4 +1,4 @@
-﻿@model FeelingGoodApp.Models.UserProfileViewModel
+﻿@model IEnumerable<FeelingGoodApp.Data.Models.Exercise>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,51 +12,50 @@
     <title>Index</title>
 </head>
 <body>
-
-<h4>UserProfileViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Index">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="query" class="control-label"></label>
-                <input asp-for="query" class="form-control" />
-                <span asp-validation-for="query" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="gender" class="control-label"></label>
-                <input asp-for="gender" class="form-control" />
-                <span asp-validation-for="gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="weight_kg" class="control-label"></label>
-                <input asp-for="weight_kg" class="form-control" />
-                <span asp-validation-for="weight_kg" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="height_cm" class="control-label"></label>
-                <input asp-for="height_cm" class="form-control" />
-                <span asp-validation-for="height_cm" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="age" class="control-label"></label>
-                <input asp-for="age" class="form-control" />
-                <span asp-validation-for="age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<p>
+    <a asp-action="GetExercise">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calories)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calories)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
 }
+    </tbody>
+</table>
 </body>
 </html>
