@@ -45,8 +45,6 @@ namespace FeelingGoodApp.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (ModelState.IsValid)
             {
-                model.Weight = customer.Weight;
-                model.GoalWeight = customer.GoalWeight;
                 customer.User = user;
             }
             await _context.Users.AnyAsync();

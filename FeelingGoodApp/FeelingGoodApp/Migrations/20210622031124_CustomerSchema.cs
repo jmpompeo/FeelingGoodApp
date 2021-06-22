@@ -41,7 +41,12 @@ namespace FeelingGoodApp.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    LastName = table.Column<string>(nullable: true),
+                    Weight = table.Column<double>(nullable: false),
+                    GoalWeight = table.Column<double>(nullable: false),
+                    ZipCode = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
+                    Address = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -176,13 +181,11 @@ namespace FeelingGoodApp.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
-                    Weight = table.Column<double>(nullable: false),
-                    GoalWeight = table.Column<double>(nullable: false),
-                    ZipCode = table.Column<int>(nullable: false),
-                    Age = table.Column<int>(nullable: false),
-                    Address = table.Column<string>(nullable: false),
+                    query = table.Column<string>(nullable: true),
+                    gender = table.Column<string>(nullable: true),
+                    weight_kg = table.Column<float>(nullable: false),
+                    height_cm = table.Column<float>(nullable: false),
+                    age = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

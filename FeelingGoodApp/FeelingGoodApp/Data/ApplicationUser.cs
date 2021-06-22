@@ -12,5 +12,22 @@ namespace FeelingGoodApp.Data
         [PersonalData]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [Required]
+        public double Weight { get; set; }
+
+        [Display(Name = "Goal Weight")]
+        [Required]
+
+        public double GoalWeight { get; set; }
+
+        [Display(Name = "Zip Code")]
+        [Required]
+        public int ZipCode { get; set; }
+
+        [Required]
+        public int Age { get; set; }
+
+        [Required]
+        public string Address { get; set; }
     }
 }
