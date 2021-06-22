@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FeelingGoodApp.Migrations
 {
     [DbContext(typeof(FeelingGoodContext))]
-    [Migration("20210622195835_CustomerSchema")]
-    partial class CustomerSchema
+    [Migration("20210622214312_ExerciseDate")]
+    partial class ExerciseDate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

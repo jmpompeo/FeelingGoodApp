@@ -7,6 +7,7 @@ using FeelingGoodApp.Services.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 namespace FeelingGoodApp.Services
 {
@@ -26,7 +27,7 @@ namespace FeelingGoodApp.Services
         
         public async Task<NutritionFactsResults> GetFieldsAsync(string item_name)
         {
-            var response = await _client.GetAsync($"v2/search/instant?query={itemName}");
+            var response = await _client.GetAsync($"v2/search/instant?query={item_name}");
             var results = await response.Content.ReadAsStringAsync();
 
             return JsonSerializer.Deserialize<NutritionFactsResults>(await response.Content.ReadAsStringAsync());

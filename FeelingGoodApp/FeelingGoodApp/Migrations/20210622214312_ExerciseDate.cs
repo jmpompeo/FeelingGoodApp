@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FeelingGoodApp.Migrations
 {
-    public partial class CustomerSchema : Migration
+    public partial class ExerciseDate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

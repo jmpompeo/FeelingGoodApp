@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210622195835_CustomerSchema.cs" />
+    <Compile Remove="Migrations\20210622195835_CustomerSchema.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\css\images\bradley-dunn-KxYG-7dOXpc-unsplash.jpg" />
   </ItemGroup>
 
