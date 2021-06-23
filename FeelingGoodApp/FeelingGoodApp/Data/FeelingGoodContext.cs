@@ -22,6 +22,8 @@ namespace FeelingGoodApp.Services.Models
         
         public DbSet<FeelingGoodApp.Models.ExerciseViewModel> ExerciseViewModel { get; set; }
         
+        public DbSet<FeelingGoodApp.Models.NutritionViewModel> NutritionViewModel { get; set; }
+        
 
     }
 }

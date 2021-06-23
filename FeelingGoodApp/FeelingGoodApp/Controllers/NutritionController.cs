@@ -62,7 +62,6 @@ namespace FeelingGoodApp.Controllers
 
             return View();
         }
-
         // GET: NutritionController/Details/5
         public IActionResult Details(int id)
         {
@@ -92,9 +91,29 @@ namespace FeelingGoodApp.Controllers
 
 
         // GET: NutritionController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var nutrition = await _context.MealData.FindAsync(id);
+
+            if (nutrition is null)
+            {
+                return NotFound();
+            }
+
+            var nut = new NutritionViewModel
+            {
+                Id = nutrition.Id,
+
+            };
+            if (nutrition == null)
+            {
+                return NotFound();
+            }
+            return View(nut);
         }
 
         // POST: NutritionController/Edit/5

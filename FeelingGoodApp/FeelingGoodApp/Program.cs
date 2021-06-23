@@ -1,4 +1,3 @@
-using FeelingGoodApp.Data;
 using FeelingGoodApp.Services.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

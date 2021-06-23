@@ -30,12 +30,16 @@
         </dd>
     </dl>
 </div>
-<div>
+@*<div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
 <form asp-action="AddToMeals">
     <div class="form-group">
+        <input asp-for="item_name" hidden />
+        <input asp-for="nf_calories" hidden />
+        <label asp-for="Quantity"></label>
+        <input asp-for="Quantity" />
         <input type="submit" value="AddToMeals" class="btn btn-primary" />
     </div>
 </form>
