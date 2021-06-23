@@ -177,16 +177,21 @@ namespace FeelingGoodApp.Controllers
         // POST: NutritionController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(GetNutrition));
-            }
-            catch
-            {
-                return View();
-            }
+            var food = await _context.MealData.FindAsync(id);
+            _context.MealData.Remove(food);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool FoodExists(int id)
+        {
+            return _context.Exercises.Any(e => e.Id == id);
+        }
+      
+        {
+            return _context.MealData.Any(e => e.Id == id);
         }
     }
 }
