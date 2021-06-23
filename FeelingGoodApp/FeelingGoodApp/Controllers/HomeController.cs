@@ -36,21 +36,19 @@ namespace FeelingGoodApp.Controllers
             return View();
         }
 
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> GetCustomerData(CustomerViewModel model)
-        //{
-        //    Customer customer = new Customer();
-        //    var user = await _userManager.GetUserAsync(User);
-        //    if (ModelState.IsValid)
-        //    {
-        //        customer.User = user;
-        //    }
-        //    await _context.Users.AnyAsync();
-        //    await _context.SaveChangesAsync();
-        //    return View(model); // need to add the ability to edit the quantity
-        //}
+        [HttpPost]
+        public async Task<IActionResult> GetCustomerData(CustomerViewModel model)
+        {
+            Customer customer = new Customer();
+            var user = await _userManager.GetUserAsync(User);
+            if (ModelState.IsValid)
+            {
+                customer.User = user;
+            }
+            await _context.Users.AnyAsync();
+            await _context.SaveChangesAsync();
+            return View(model); // need to add the ability to edit the quantity
+        }
 
 
         public async Task<IActionResult> Edit(int? id)
