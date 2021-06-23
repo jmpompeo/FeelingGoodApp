@@ -62,21 +62,6 @@ namespace FeelingGoodApp.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> AddToMeals(NutritionViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await _usermanager.GetUserAsync(User);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-
-        //    }
-
-        //    return View(model);
-        //}
-
-
-
         // GET: NutritionController/Details/5
         public ActionResult Details(int id)
         {
