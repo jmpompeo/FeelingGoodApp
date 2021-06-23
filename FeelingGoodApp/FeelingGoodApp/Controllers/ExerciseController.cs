@@ -70,20 +70,7 @@ namespace FeelingGoodApp.Controllers
             return View(exercise); // need to add the ability to edit the quantity
         }
 
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var exercise = await _context.Exercises
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (exercise == null)
-            {
-                return NotFound();
-            }
-            return View(exercise);
-        }
+     
         //added GET create
         public IActionResult Create()
         {
@@ -195,5 +182,6 @@ namespace FeelingGoodApp.Controllers
         {
             return _context.Exercises.Any(e => e.Id == id);
         }
+     
     }
 }
