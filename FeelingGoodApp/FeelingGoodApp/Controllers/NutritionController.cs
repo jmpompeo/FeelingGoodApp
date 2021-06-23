@@ -26,6 +26,13 @@ namespace FeelingGoodApp.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            var userId = _usermanager.GetUserId(User);
+            return View(await _context.MealData.Where
+                (x => x.User.Id == userId).ToListAsync());
+        }
+
         [HttpPost]
         public async Task<IActionResult> GetNutrition(NutritionViewModel model)
         {
@@ -47,71 +54,41 @@ namespace FeelingGoodApp.Controllers
             }
             _context.MealData.Add(FoodChoice);
             await _context.SaveChangesAsync();
+            nutritionModel.Id = FoodChoice.Id;
             return View(nutritionModel); // need to add the ability to edit the quantity
         }
-
-        public async Task<IActionResult> Index()
-        { ///
-            var userId = _usermanager.GetUserId(User);
-            return View(await _context.MealData.Where(x => x.User.Id == userId).ToListAsync());
-        }
-
         public IActionResult AddFood()
         {
 
             return View();
         }
-
-        public async Task<IActionResult> AddToMeals(NutritionViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _usermanager.GetUserAsync(User);
-
-                var nutrition = new Nutrition
-                {
-                    Item_name = model.item_name,
-                    Nf_calories = model.nf_calories,
-                    Quantity = model.Quantity,
-                    User = user
-                };
-
-                await _context.AddAsync(nutrition);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(model);
-        }
-
-
-
         // GET: NutritionController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: NutritionController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// GET: NutritionController/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: NutritionController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(GetNutrition));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// POST: NutritionController/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(GetNutrition));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
 
         // GET: NutritionController/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -144,49 +121,74 @@ namespace FeelingGoodApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, NutritionViewModel model)
         {
-            var information = await _service.GetFieldsAsync(model.item_name);
-            var foodChoice = new Nutrition();
-            var nutritionModel = new NutritionViewModel();
-            var user = await _usermanager.GetUserAsync(User);
-
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
             if (ModelState.IsValid)
             {
-                foodChoice.Id = id;
-                foodChoice.Item_name = information.hits.FirstOrDefault().fields.item_name;
-                foodChoice.Nf_calories = information.hits.FirstOrDefault().fields.nf_calories;
-                foodChoice.Quantity = information.hits.FirstOrDefault().fields.nf_serving_size_qty;
-                foodChoice.User = user;
-
-                nutritionModel.item_name = foodChoice.Item_name;
-                nutritionModel.nf_calories = foodChoice.Nf_calories;
-                nutritionModel.Quantity = foodChoice.Quantity;
+                try
+                {
+                    _context.Update(model);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!FoodExists(model.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                    
+                }
+                return RedirectToAction(nameof(Index));
             }
-
-            _context.MealData.Update(foodChoice);
-            await _context.SaveChangesAsync();
-
-            return View(nameof(GetNutrition), nutritionModel);
+            return View(model);
         }
 
         // GET: NutritionController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var food = await _context.MealData.FindAsync(id);
+            var model = new NutritionViewModel
+            {
+                Id = food.Id
+            };
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
         }
 
         // POST: NutritionController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(GetNutrition));
-            }
-            catch
-            {
-                return View();
-            }
+            var food = await _context.MealData.FindAsync(id);
+            _context.MealData.Remove(food);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool FoodExists(int id)
+        {
+            return _context.Exercises.Any(e => e.Id == id);
+        }
+        private bool FoodExists(int id)
+        {
+            return _context.MealData.Any(e => e.Id == id);
         }
     }
 }
