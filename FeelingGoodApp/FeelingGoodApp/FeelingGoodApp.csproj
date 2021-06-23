@@ -12,9 +12,12 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\images\bradley-dunn-KxYG-7dOXpc-unsplash.jpg" />
+    <None Include="wwwroot\css\images\david-marioni-F_lns58a_ec-unsplash - Copy.jpg" />
+    <None Include="wwwroot\css\images\jenny-hill-mQVWb7kUoOE-unsplash.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.14" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.15" />
