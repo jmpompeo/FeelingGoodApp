@@ -34,6 +34,30 @@ namespace FeelingGoodApp.Controllers
             return View(await _context.Exercises.Where(x => x.User.Id == userId).ToListAsync());
         }
 
+        //added details
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var exercise = await _context.Exercises
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+
+            return View(exercise);
+        }
+
+        //added GET create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         public IActionResult GetExercise()
         {
             return View();
@@ -72,24 +96,24 @@ namespace FeelingGoodApp.Controllers
 
      
         //added GET create
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        //added Post Create and Bind to protect against overposting attacks
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,User")] ExerciseInfo exercise)
-        {
-            if (ModelState.IsValid)
-            {
-                exercise.User = await _usermanager.GetUserAsync(User);
-                _context.Add(exercise);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(exercise);
-        }
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        ////added Post Create and Bind to protect against overposting attacks
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Name,User")] ExerciseInfo exercise)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        exercise.User = await _usermanager.GetUserAsync(User);
+        //        _context.Add(exercise);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(exercise);
+        //}
         // Get Exercise Edit
         public async Task<IActionResult> Edit(int? id)
         {
@@ -182,6 +206,5 @@ namespace FeelingGoodApp.Controllers
         {
             return _context.Exercises.Any(e => e.Id == id);
         }
-     
     }
 }
