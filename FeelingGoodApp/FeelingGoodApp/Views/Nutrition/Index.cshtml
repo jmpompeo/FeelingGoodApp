@@ -1,23 +1,28 @@
-﻿@model IEnumerable<FeelingGoodApp.Models.NutritionViewModel>
+﻿@model IEnumerable<FeelingGoodApp.Data.Models.Nutrition>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Identity/Pages/Account/Manage/_Layout.cshtml";
+    Layout = null;
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
 <p>
-    <a asp-action="">Create New</a>
+    <a asp-action="AddFood">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.item_name)
+                @Html.DisplayNameFor(model => model.Item_name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nf_calories)
+                @Html.DisplayNameFor(model => model.Nf_calories)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
@@ -29,10 +34,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.item_name)
+                @Html.DisplayFor(modelItem => item.Item_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.nf_calories)
+                @Html.DisplayFor(modelItem => item.Nf_calories)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
@@ -46,3 +51,5 @@
 }
     </tbody>
 </table>
+</body>
+</html>
