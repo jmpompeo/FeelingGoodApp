@@ -62,21 +62,6 @@ namespace FeelingGoodApp.Controllers
             return View();
         }
 
-        public async Task<IActionResult> AddToMeals(NutritionViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _usermanager.GetUserAsync(User);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-
-            }
-
-            return View(model);
-        }
-
-
-
         // GET: NutritionController/Details/5
         public ActionResult Details(int id)
         {
@@ -113,16 +98,34 @@ namespace FeelingGoodApp.Controllers
         // POST: NutritionController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, NutritionViewModel model)
         {
-            try
+            if (id != model.Id)
             {
-                return RedirectToAction(nameof(GetNutrition));
+                return NotFound();
             }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+                    _context.Update(model);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!FoodExists(model.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                    
+                }
+                return RedirectToAction(nameof(Index));
             }
+            return View(model);
         }
 
         // GET: NutritionController/Delete/5
@@ -144,6 +147,10 @@ namespace FeelingGoodApp.Controllers
             {
                 return View();
             }
+        }
+        private bool FoodExists(int id)
+        {
+            return _context.MealData.Any(e => e.Id == id);
         }
     }
 }
