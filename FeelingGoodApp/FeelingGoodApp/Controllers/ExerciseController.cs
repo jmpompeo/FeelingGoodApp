@@ -3,6 +3,7 @@ using FeelingGoodApp.Data.Models;
 using FeelingGoodApp.Models;
 using FeelingGoodApp.Services;
 using FeelingGoodApp.Services.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -69,6 +70,7 @@ namespace FeelingGoodApp.Controllers
             var information = await _service.GetExercise(model);
             var exr = new Exercise();
             var user = await _usermanager.GetUserAsync(User);
+
             if (ModelState.IsValid)
             {
                 exr.Pace = information.Met;
@@ -82,9 +84,13 @@ namespace FeelingGoodApp.Controllers
                 exercise.Description = exr.Description;
 
             }
-            _context.Exercises.Add(exr);
-            await _context.SaveChangesAsync();
-            exercise.Id = exr.Id.Value;
+
+            if (user != null)// Verifies that a user is logged in and saves the data. Otherwise does not save the data if no user is logged in.
+            {
+                _context.Exercises.Add(exr);
+                await _context.SaveChangesAsync();
+                exercise.Id = exr.Id.Value;
+            }
             return View(exercise); // need to add the ability to edit the quantity
         }
 
@@ -103,24 +109,24 @@ namespace FeelingGoodApp.Controllers
             return View(exercise);
         }
         //added GET create
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        //added Post Create and Bind to protect against overposting attacks
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,User")] ExerciseInfo exercise)
-        {
-            if (ModelState.IsValid)
-            {
-                exercise.User = await _usermanager.GetUserAsync(User);
-                _context.Add(exercise);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(exercise);
-        }
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        ////added Post Create and Bind to protect against overposting attacks
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Name,User")] ExerciseInfo exercise)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        exercise.User = await _usermanager.GetUserAsync(User);
+        //        _context.Add(exercise);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(exercise);
+        //}
         // Get Exercise Edit
         public async Task<IActionResult> Edit(int? id)
         {
@@ -131,7 +137,8 @@ namespace FeelingGoodApp.Controllers
             var exercise = await _context.Exercises.FindAsync(id);
             var exr = new UserProfileViewModel
             {
-                Id = exercise.Id.Value
+                Id = exercise.Id.Value,
+
             };
             if (exercise == null)
             {
@@ -148,6 +155,8 @@ namespace FeelingGoodApp.Controllers
             {
                 return NotFound();
             }
+            // this needs to call the api to get a new Exercise based off of the new information...
+
             if (ModelState.IsValid)
             {
                 try
@@ -185,7 +194,7 @@ namespace FeelingGoodApp.Controllers
             };
 
             var model = new ExerciseViewModel
-            { 
+            {
                 Id = exercise.Id.Value
             };
             //var toDo = await _context.Exercises

@@ -14,6 +14,10 @@
     <None Include="wwwroot\css\images\bradley-dunn-KxYG-7dOXpc-unsplash.jpg" />
     <None Include="wwwroot\css\images\david-marioni-F_lns58a_ec-unsplash - Copy.jpg" />
     <None Include="wwwroot\css\images\jenny-hill-mQVWb7kUoOE-unsplash.jpg" />
+    <None Include="wwwroot\css\images\Libertad.jpg" />
+    <None Include="wwwroot\css\images\salad.jpg" />
+    <None Include="wwwroot\css\images\unsplash.jpg" />
+    <None Include="wwwroot\css\images\yogaclass.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +36,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
