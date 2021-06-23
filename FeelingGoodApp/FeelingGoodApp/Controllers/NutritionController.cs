@@ -147,7 +147,7 @@ namespace FeelingGoodApp.Controllers
 
         private bool FoodExists(int id)
         {
-            return _context.Exercises.Any(e => e.Id == id);
+            return _context.MealData.Any(e => e.Id == id);
         }
     }
 }
