@@ -10,43 +10,57 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>ShowExercise</title>
+
 </head>
 <body>
 
-<div>
-    <h4>ExerciseViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Duration)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Duration)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pace)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pace)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Calories)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Calories)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <h4>ExerciseViewModel</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Duration)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Duration)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Pace)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Pace)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Calories)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Calories)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h3><strong>Let's be the CEO of our own health</strong></h3>
+                <img src="~/css/images/HereWeGo.jpg" class="img" />
+
+            </div>
+        </div>
+    </div>
+  
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> |
+        <a asp-action="Index">Back to List</a>
+
+    </div>
 </body>
 </html>

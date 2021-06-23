@@ -25,7 +25,7 @@ namespace FeelingGoodApp
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<FeelingGoodContext>();
-                context.Database.Migrate();
+                context.Database.EnsureCreated();
             }
 
             host.Run();
