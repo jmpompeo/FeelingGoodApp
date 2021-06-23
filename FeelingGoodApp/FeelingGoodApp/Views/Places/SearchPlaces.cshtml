@@ -6,54 +6,18 @@
 
 <h1>SearchPlaces</h1>
 
-@*<h4>IndexViewModel</h4>
-<hr />
-<div class="container"
-<div class="row">
-    <div class="col-sm">
-        <form asp-action="GetPlaces">
-            Address/Zip <input type="text" name="address" /> <br />
-            Radius<select name="radius">
-                <option value="5000">5km</option>
-                <option value="10000">10km</option>
-                <option value="15000">15km</option>
-                <option value="20000">20km</option>
-            </select><br />
-            Activities<select name="type">
-                <option value="gym">Gym</option>
-                <option value="cafe">Coffee Shops</option>
-                <option value="yoga">Yoga</option>
-                <option value="restaurants">Restaurants</option>
-                <option value="market">Markets</option>
-                <option value="hotels">Hotels</option>
-            </select>
-
-            <input type="submit" value="Search" />
-        </form>
-    </div>
-    <div class="col-sm">
-
-            <img src="~/css/images/bradley-dunn-KxYG-7dOXpc-unsplash.jpg" class="img" />
-
-    </div>
-</div>
-     </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>*@
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
             <form asp-action="GetPlaces">
-                Address/Zip <input type="text" name="address" /> <br />
-                Radius<select name="radius">
+                <strong>Address/Zip</strong>  <input type="text" name="address" /> <br />
+               <strong>Radius</strong> <select name="radius">
                     <option value="5000">5km</option>
                     <option value="10000">10km</option>
                     <option value="15000">15km</option>
                     <option value="20000">20km</option>
                 </select><br />
-                Activities<select name="type">
+                <strong>Activities</strong><select name="type">
                     <option value="gym">Gym</option>
                     <option value="cafe">Coffee Shops</option>
                     <option value="yoga">Yoga</option>
@@ -66,9 +30,12 @@
             </form>
         </div>
         <div class="col-sm-9">
-            <img src="~/css/images/bradley-dunn-KxYG-7dOXpc-unsplash.jpg" class="img" />
+            <h3><strong>Vitality shows in not only the ability to<br />Persist but theability to start over.</strong></h3>
+            <img src="~/css/images/Libertad.jpg" class="img" />
+
         </div>
-        
+
+
     </div>
 </div>
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FeelingGoodApp.Models.NutritionViewModel>
+﻿@model IEnumerable<FeelingGoodApp.Data.Models.Nutrition>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,10 +14,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.item_name)
+                @Html.DisplayNameFor(model => model.Item_name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nf_calories)
+                @Html.DisplayNameFor(model => model.Nf_calories)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
@@ -29,10 +29,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.item_name)
+                @Html.DisplayFor(modelItem => item.Item_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.nf_calories)
+                @Html.DisplayFor(modelItem => item.Nf_calories)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)

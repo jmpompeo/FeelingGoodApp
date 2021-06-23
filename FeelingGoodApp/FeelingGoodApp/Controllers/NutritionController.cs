@@ -51,7 +51,7 @@ namespace FeelingGoodApp.Controllers
         }
 
         public async Task<IActionResult> Index()
-        {
+        { ///
             var userId = _usermanager.GetUserId(User);
             return View(await _context.MealData.Where(x => x.User.Id == userId).ToListAsync());
         }
@@ -67,9 +67,18 @@ namespace FeelingGoodApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _usermanager.GetUserAsync(User);
+
+                var nutrition = new Nutrition
+                {
+                    Item_name = model.item_name,
+                    Nf_calories = model.nf_calories,
+                    Quantity = model.Quantity,
+                    User = user
+                };
+
+                await _context.AddAsync(nutrition);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-
             }
 
             return View(model);

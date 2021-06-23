@@ -7,6 +7,10 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\images\bradley-dunn-KxYG-7dOXpc-unsplash.jpg" />
+    <None Include="wwwroot\css\images\Libertad.jpg" />
+    <None Include="wwwroot\css\images\salad.jpg" />
+    <None Include="wwwroot\css\images\unsplash.jpg" />
+    <None Include="wwwroot\css\images\yogaclass.jpg" />
   </ItemGroup>
 
   <ItemGroup>
