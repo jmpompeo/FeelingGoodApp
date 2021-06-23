@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>WELCOME TO FEELING GOOD.</title>
+    <style>
+
+        .resize{
+            width:400px;
+            height: auto;
+            border-radius: 75%;
+            float:left
+        }
+
+        .resize {
+            align-items:center;
+            width:400px;
+            height:auto;
+        }
+
+        .resize1 {
+            width: 400px;
+            height: auto;
+            border-radius: 75%;
+            float:right
+        }
+        .resize1 {
+            align-items: center;
+            width: 400px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+      <div>
+          <h1 class="text-center">WELCOME TO FEELING GOOD. THE APP THAT LETS YOU TRACK YOUR <strong>FITNESS & NUTRITION</strong> GOALS IN ONE CONVENIENT PLACE.</h1><br />
+          <h2 class="text-center">USE THE APP TO <strong>BUILD A BETTER YOU</strong>. ANYTHING IS POSSIBLE WHEN YOU'RE FEELING GOOD.</h2>
+          <h3 class="text-center">PLEASE CLICK THE TOP RIGHT BUTTONS TO REGISTER FOR AN ACCOUNT, SO YOU CAN BEGIN YOUR FITNESS JOURNEY.</h3>
+      </div>
+</body>
+</html>
+<div>
+    <a asp-controller="Exercise" asp-action="GetExercise"><img class="resize" src="~/css/images/anastase-maragos-9dzWZQWZMdE-unsplash.jpg" /></a>
+</div>
+<div>
+    <a asp-controller="Nutrition" asp-action="AddFood"><img class="resize1" src="~/css/images/mor-shani-li4dxZ0KYRw-unsplash.jpg" /></a>
+</div>
+<div>
+    <a asp-controller="Places" asp-action="SearchPlaces"><img class="resize" src="~/css/images/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg" /></a>
+</div>
+<div>
+    <a asp-controller="Home" asp-action="AboutUs"><img class="resize1" src="~/css/images/meghan-holmes-wy_L8W0zcpI-unsplash.jpg" /></a>
+</div><br />
+
+<footer></footer>
+
