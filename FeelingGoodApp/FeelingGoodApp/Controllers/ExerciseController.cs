@@ -94,20 +94,6 @@ namespace FeelingGoodApp.Controllers
             return View(exercise); // need to add the ability to edit the quantity
         }
 
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var exercise = await _context.Exercises
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (exercise == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(exercise);
-        //}
         //added GET create
         //public IActionResult Create()
         //{
@@ -235,37 +221,7 @@ namespace FeelingGoodApp.Controllers
         //    return View(exercise);
         //}
         // Added POST Exercise Edit
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,User")] ExerciseInfo exercise)
-        {
-            if (id != exercise.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(exercise);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!exerciseExists(exercise.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(exercise);
-        }
+       
         //Added Get Delete
         //public async Task<IActionResult> Delete(int? id)
         //{

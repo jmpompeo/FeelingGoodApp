@@ -75,7 +75,6 @@ namespace FeelingGoodApp.Controllers
                 return NotFound();
             }
             return View(meal);
-        }
 
         //// GET: NutritionController/Create
         //public ActionResult Create()
