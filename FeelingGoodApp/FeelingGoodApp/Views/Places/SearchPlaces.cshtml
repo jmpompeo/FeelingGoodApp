@@ -4,11 +4,11 @@
     ViewData["Title"] = "SearchPlaces";
 }
 
-<h1>SearchPlaces</h1>
-<div class="container">
-    <div class="row">
+<h1>Search Places</h1>
+<div class="form-row">
+    <div class="col-md-4">
         <div class="col-sm-3">
-            <form asp-action="GetPlaces">
+            <form class="form-row" asp-action="GetPlaces">
                 <strong>Address/Zip</strong>  <input type="text" name="address" /> <br />
                <strong>Radius</strong> <select name="radius">
                     <option value="5000">5km</option>

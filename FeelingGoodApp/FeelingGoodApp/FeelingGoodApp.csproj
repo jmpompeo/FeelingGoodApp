@@ -8,6 +8,14 @@
   <ItemGroup>
     <Compile Remove="Migrations\20210622195835_CustomerSchema.cs" />
     <Compile Remove="Migrations\20210622195835_CustomerSchema.Designer.cs" />
+    <Compile Remove="Migrations\20210622222908_latestbuild.cs" />
+    <Compile Remove="Migrations\20210622222908_latestbuild.Designer.cs" />
+    <Compile Remove="Migrations\20210623030019_InitialMigrations.cs" />
+    <Compile Remove="Migrations\20210623030019_InitialMigrations.Designer.cs" />
+    <Compile Remove="Migrations\20210623031931_2ndMigrations.cs" />
+    <Compile Remove="Migrations\20210623031931_2ndMigrations.Designer.cs" />
+    <Compile Remove="Migrations\20210623165128_bugfix1.cs" />
+    <Compile Remove="Migrations\20210623165128_bugfix1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -94,7 +94,6 @@ namespace FeelingGoodApp.Controllers
             return View(exercise); // need to add the ability to edit the quantity
         }
 
-     
         //added GET create
         //public IActionResult Create()
         //{
@@ -203,6 +202,58 @@ namespace FeelingGoodApp.Controllers
             return RedirectToAction(nameof(Index));
         }
         private bool ExerciseExists(int id)
+        {
+            return _context.Exercises.Any(e => e.Id == id);
+        }
+        // Get Exercise Edit
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var exercise = await _context.Exercises.FindAsync(id);
+        //    if (exercise == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(exercise);
+        //}
+        // Added POST Exercise Edit
+       
+        //Added Get Delete
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var toDo = await _context.Exercises
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (toDo == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(toDo);
+        //}
+        ////Added Post Delete
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var Exercises = await _context.Exercises.FindAsync(id);
+        //    _context.Exercises.Remove(Exercises);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+
+
+        private bool exerciseExists(int id)
         {
             return _context.Exercises.Any(e => e.Id == id);
         }

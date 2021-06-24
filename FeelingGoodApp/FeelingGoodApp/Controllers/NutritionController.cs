@@ -63,10 +63,18 @@ namespace FeelingGoodApp.Controllers
             return View();
         }
         // GET: NutritionController/Details/5
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return View();
-        }
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var meal = await _context.MealData.FirstOrDefaultAsync(m => m.Id == id);
+            if (meal == null)
+            {
+                return NotFound();
+            }
+            return View(meal);
 
         //// GET: NutritionController/Create
         //public ActionResult Create()

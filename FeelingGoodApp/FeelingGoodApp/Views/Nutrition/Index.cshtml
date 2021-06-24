@@ -1,49 +1,92 @@
 ﻿@model IEnumerable<FeelingGoodApp.Data.Models.Nutrition>
 
-@{
-    ViewData["Title"] = "Index";
-}
-    <h1>Index</h1>
-    <body style="background-image: "">
+@{ ViewData["Title"] = "Index"; }
+<h1>Look up some healthy food choices!</h1>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>WELCOME TO FEELING GOOD.</title>
+    <style>
 
-        <p>
-            <a asp-action="AddFood">Create New</a>
-        </p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Item_name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nf_calories)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Quantity)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Item_name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nf_calories)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Quantity)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        </body>
+        .resize {
+            width: 400px;
+            height: auto;
+            border-radius: 75%;
+            float: left
+        }
+
+        .resize {
+            align-items: center;
+            width: 400px;
+            height: auto;
+        }
+
+        .resize1 {
+            width: 400px;
+            height: auto;
+            border-radius: 75%;
+            float: right
+        }
+
+        .resize1 {
+            align-items: center;
+            width: 400px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <p>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Nutrition" asp-action="AddFood">Create New Meal</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nf_calories)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Item_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nf_calories)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Quantity)
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+</tr>
+}
+        </tbody>
+    </table>
+</body>
+<div>
+    <a asp-controller="Exercise" asp-action="GetExercise"><img class="resize" src="~/css/images/anastase-maragos-9dzWZQWZMdE-unsplash.jpg" /></a>
+</div>
+<div>
+    <a asp-controller="Nutrition" asp-action="AddFood"><img class="resize1" src="~/css/images/mor-shani-li4dxZ0KYRw-unsplash.jpg" /></a>
+</div>
+<div>
+    <a asp-controller="Places" asp-action="SearchPlaces"><img class="resize" src="~/css/images/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg" /></a>
+</div>
+<div>
+    <a asp-controller="Home" asp-action="AboutUs"><img class="resize1" src="~/css/images/meghan-holmes-wy_L8W0zcpI-unsplash.jpg" /></a>
+</div>
+<br />
