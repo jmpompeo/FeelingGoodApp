@@ -4,35 +4,39 @@
     ViewData["Title"] = "GetExercise";
 }
 
-<h1>GetExercise</h1>
+<h1>Get Exercise</h1>
 
-<h4>UserProfileViewModel</h4>
+<h4>Ready to track your exercises?</h4>
 <hr />
-<div class="row">
+<div class="form-row">
     <div class="col-md-4">
-        <form asp-controller="Exercise" asp-action="ShowExercise">
-            <label asp-for="query">Enter Exercise</label>
-            <input asp-for="query" required /> <br />
+        <form class="form-row" asp-controller="Exercise" asp-action="ShowExercise">
+            <label>Search for your exercise</label>
+            @*<label asp-for="query">Enter Exercise</label>*@
+            <input asp-for="query" class="form-control" placeholder="Exercise" required /> 
 
-            <label asp-for="gender"></label>
-            <input asp-for="gender" /><br />
+            @*<label asp-for="gender"></label>*@
+            <input asp-for="gender" class="form-control" placeholder="Gender"/>
 
-            <label asp-for="weight_kg"></label>
-            <input type="number" asp-for="weight_kg" min="10" max="250" step="0.01" /><br />
+            @*<label asp-for="weight_kg"></label>*@
+            <input type="number" asp-for="weight_kg" class="form-control" placeholder="Weight" min="10" max="250" step="0.01" />
 
-            <label asp-for="height_cm"></label>
-            <input type="number" asp-for="height_cm" min="40" max="300" step="0.01" /><br />
+            @*<label asp-for="height_cm"></label>*@
+            <input type="number" asp-for="height_cm" class="form-control" placeholder="Height" min="40" max="300" step="0.01" />
 
-            <label asp-for="age"></label>
-            <input type="number" asp-for="age" min="13" max="120" /><br />
+            @*<label asp-for="age"></label>*@
+            <input type="number" asp-for="age" class="form-control" placeholder="Age" min="13" max="120" /><br />
 
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
      
     </div>
 </div>
-
+<div class="col-sm-9">
+    <img src="~/css/images/humphrey-muleba-LOA2mTj1vhc-unsplash.jpg" class="img" width="1800" height="800"/>
+</div>
 <div>
+    <a asp-action="Edit">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
 

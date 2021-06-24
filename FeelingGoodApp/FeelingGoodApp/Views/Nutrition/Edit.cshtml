@@ -1,7 +1,6 @@
-﻿@model IEnumerable<FeelingGoodApp.Data.Models.Nutrition>
+﻿@model FeelingGoodApp.Models.NutritionViewModel
 
-@{ ViewData["Title"] = "Index"; }
-<h1>Look up some healthy food choices!</h1>
+@{ ViewData["Title"] = "Edit"; }
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>WELCOME TO FEELING GOOD.</title>
@@ -35,47 +34,35 @@
     </style>
 </head>
 <body>
+    <h1>Edit</h1>
 
-    <p>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Nutrition" asp-action="AddFood">Create New Meal</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Item_name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nf_calories)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Item_name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Nf_calories)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Quantity)
-    </td>
-    <td>
-        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-    </td>
-</tr>
-}
-        </tbody>
-    </table>
+    <h4>Modify your meal</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="item_name" class="control-label"></label>
+                    <input asp-for="item_name" class="form-control" />
+                    <span asp-validation-for="item_name" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Quantity" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>*@
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 </body>
 <div>
     <a asp-controller="Exercise" asp-action="GetExercise"><img class="resize" src="~/css/images/anastase-maragos-9dzWZQWZMdE-unsplash.jpg" /></a>
